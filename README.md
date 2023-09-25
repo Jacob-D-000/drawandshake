@@ -15,8 +15,8 @@ This spirit will be dedicated to researching and designing the app. This will be
 This sprint will be dedicated to coding and researching for the app. We will:
 1. Create the app interface for the main and drawing page. These elements would be interactive. 
 2. Research save states so that the app will bring up the image that was last drawn if the user didn't shake.
-3. implement the circular button  so that it moves with the user's figure (does not draw to the screen yet.)
+3. Implement the circular button  so that it moves with the user's finger (does not draw to the screen yet.)
 ## Third Sprint
 This sprint will be dedicated to developing an implementing a method i which the user can draw to the screen.
-1. First we would make it so that the user can draw with their figure.
-2. Next we could create a method in which the user manipulates the buttons to draw to the screen.
+1. First we would make it so that the user can draw with their finger.
+2. Next we could create a method in which the user manipulates finger buttons to draw to the screen.
