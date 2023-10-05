@@ -37,8 +37,10 @@ acceleration is determined using an X - Y - Z
 It is important to note some other behaviors of x-y-z including the fact that the orientation of x-y-z is based on the default orientation (portrait and landscape) so our app would need to check the orientation of the phone and change the coords with `remapCoordinateSystem()` so they are landscape oriented
 
 ## Action plan
-With all of this in mind, I think I can write up a basic action plan on the implementation of the shake.
+With all of this in mind, I think I can write up a basic action plan for the implementation of the shake.
 
-1. When the app is first launched, we check to see if the phone contains the proper hardware to check motion (it probably does but its worthing check in the event the sensors is blocked or non-functional) 
+1. When the app is first launched, we check to see if the phone contains the proper hardware to check motion (it probably does but it is worth checking in the event the sensors are blocked or non-functional) 
 2. Create all appropriate objects (sensor, event handle, manager, and listener) if the sensor works properly.
-3. The event handle will contain the functions required to change the screen during the shake, (if acceleration >= eraseShakeAcc { remove items from the screen } ). The most important determining factor will be how often we can check the acceleration. If the check is to infrequent, the the change would be very rough and inconsistent.
+3. The event handle will contain the functions required to change the screen during the shake, (if acceleration >= eraseShakeAcc { remove items from the screen } ). The most important determining factor will be how often we can check the acceleration. If the check is too infrequent, the change would be very rough and inconsistent. If we need to collect data faster than normal (normal as in normal for Android) we would have to override it and determine our frequency of collection.
+
+How we ultimately change the screen is still up in the air, but I think that this data should be enough to at least collect the necessary information to determine when a shake occurs and to implement some kind of event do to that fact.
