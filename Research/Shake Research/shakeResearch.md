@@ -12,9 +12,9 @@ Some things that I would like to find include:
 Because of the success of my previous research, I decided to check the Android development website to see what I could find on shake detection. The first thing I found was an overview of sensors for Android https://developer.android.com/guide/topics/sensors/sensors_overview
 
 There are three different sensors built into androids but the most important for our use case is the motion sensor. This sensor generally seems to be hardware-based which means that `android.hardware` https://developer.android.com/reference/android/hardware/package-summary package will need to be imported when making a class to collect sensor data. This package includes:
-- Sensor manager: manages the data and makes sure that a sensor exists when it needs to
-- Sensor: Class we would use to create the sensor for motion
-- Sensor event: Where the raw data from the motion is stored (type of motion, accuracy, timestamp, etc.)
+- sensorManager: manages the data and makes sure that a sensor exists when it needs to
+- sensor: Class we would use to create the sensor for motion
+- sensorEvent: Where the raw data from the motion is stored (type of motion, accuracy, timestamp, etc.)
 - sensorEvertListener: create a callback that either change values (when the event happens) and their accuracy
 
 Because We will be using the accelerometer sensor, we do not need to worry about the version of the phone because Android since 1.5 have motion sensors. If we do want to make sure the sensor is onboard, we could use `SensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)`.
@@ -35,3 +35,10 @@ acceleration is determined using an X - Y - Z
 - up (positive) and down (negative)
 
 It is important to note some other behaviors of x-y-z including the fact that the orientation of x-y-z is based on the default orientation (portrait and landscape) so our app would need to check the orientation of the phone and change the coords with `remapCoordinateSystem()` so they are landscape oriented
+
+## Action plan
+With all of this in mind, I think I can write up a basic action plan on the implementation of the shake.
+
+1. When the app is first launched, we check to see if the phone contains the proper hardware to check motion (it probably does but its worthing check in the event the sensors is blocked or non-functional) 
+2. Create all appropriate objects (sensor, event handle, manager, and listener) if the sensor works properly.
+3. The event handle will contain the functions required to change the screen during the shake, (if acceleration >= eraseShakeAcc { remove items from the screen } ). The most important determining factor will be how often we can check the acceleration. If the check is to infrequent, the the change would be very rough and inconsistent.
