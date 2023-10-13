@@ -11,6 +11,7 @@
         android:id="@+id/Background_Image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:contentDescription="@string/DrawButton"
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -18,15 +19,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/itch_and_scetch_logo"
-        android:contentDescription="@string/todo1" />
+        app:srcCompat="@drawable/itch_and_scetch_logo" />
 
     <ImageButton
         android:id="@+id/DrawButton"
         android:layout_width="326dp"
         android:layout_height="97dp"
         android:background="@drawable/itch_in_scitch_draw_button"
-        android:contentDescription="TODO"
+        android:contentDescription="@string/DrawButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,36 +34,45 @@
         app:layout_constraintVertical_bias="0.33"
         tools:ignore="ContentDescription,HardcodedText,DuplicateSpeakableTextCheck" />
 
+
     <ImageView
         android:id="@+id/imageView9"
         android:layout_width="156dp"
         android:layout_height="229dp"
+        android:contentDescription="@string/TraceImg"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.062"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/itch_and_skitch_trace_image"
-        android:contentDescription="TODO"
         tools:ignore="ContentDescription,HardcodedText" />
 
     <ImageView
         android:id="@+id/imageView10"
         android:layout_width="201dp"
         android:layout_height="248dp"
+        android:contentDescription="@string/ClassicImg"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/itch_in_scitch_classic_image"
-        android:contentDescription="@string/todo2" />
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/imageView9"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/itch_in_scitch_classic_image" />
 
-    <Switch
-        android:id="@+id/switch1"
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/menu_switch"
+        android:theme="@style/SwitchCompatStyle"
         android:layout_width="62dp"
         android:layout_height="33dp"
-        android:layout_marginTop="76dp"
-        android:tint="@color/black"
+        android:layout_marginTop="32dp"
         android:scaleX="2"
         android:scaleY="2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.467"
+        app:layout_constraintHorizontal_bias="0.446"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
         app:layout_constraintVertical_bias="0.0"
@@ -73,13 +82,14 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="72dp"
+        android:layout_marginTop="60dp"
         android:text="@string/select_a_mode"
         android:textColor="#E31111"
         android:textSize="34sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/textView2"
         app:layout_constraintEnd_toEndOf="@+id/Background_Image"
-        app:layout_constraintHorizontal_bias="0.149"
+        app:layout_constraintHorizontal_bias="0.086"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/DrawButton" />
 
@@ -87,26 +97,30 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="44dp"
+        android:layout_marginBottom="68dp"
         android:text="@string/trace"
         android:textColor="#F44336"
         android:textSize="34sp"
         app:layout_constraintBottom_toTopOf="@+id/imageView9"
-        app:layout_constraintEnd_toStartOf="@+id/switch1"
-        app:layout_constraintHorizontal_bias="0.546"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toStartOf="@+id/menu_switch"
+        app:layout_constraintHorizontal_bias="0.597"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/DrawButton"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="48dp"
         android:text="@string/classic"
         android:textColor="#F44336"
         android:textSize="34sp"
         app:layout_constraintBottom_toTopOf="@+id/imageView10"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.538"
-        app:layout_constraintStart_toEndOf="@+id/switch1" />
+        app:layout_constraintHorizontal_bias="0.65"
+        app:layout_constraintStart_toEndOf="@+id/menu_switch"
+        app:layout_constraintTop_toBottomOf="@+id/DrawButton"
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

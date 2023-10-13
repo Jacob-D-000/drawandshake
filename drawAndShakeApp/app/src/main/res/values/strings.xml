@@ -1,10 +1,10 @@
 <resources>
     <string name="app_name">drawAndShakeApp</string>
-    <string name="todo">TODO</string>
     <string name="select_mode">Select Mode:</string>
     <string name="trace">Trace</string>
-    <string name="todo1">TODO</string>
-    <string name="todo2">TODO</string>
     <string name="classic">Classic</string>
     <string name="select_a_mode">Select a mode:</string>
+    <string name="DrawButton" />
+    <string name="ClassicImg" />
+    <string name="TraceImg" />
 </resources>
