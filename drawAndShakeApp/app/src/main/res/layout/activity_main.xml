@@ -15,7 +15,7 @@
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
@@ -32,17 +32,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/Background_Image"
         app:layout_constraintVertical_bias="0.33"
-        tools:ignore="ContentDescription,HardcodedText,DuplicateSpeakableTextCheck" />
+        tools:ignore="ContentDescription,HardcodedText,DuplicateSpeakableTextCheck,SpeakableTextPresentCheck" />
 
 
     <ImageView
-        android:id="@+id/imageView9"
+        android:id="@+id/Trace_Image"
         android:layout_width="156dp"
         android:layout_height="229dp"
         android:contentDescription="@string/TraceImg"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.062"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
@@ -50,36 +50,37 @@
         tools:ignore="ContentDescription,HardcodedText" />
 
     <ImageView
-        android:id="@+id/imageView10"
+        android:id="@+id/Classic_Image"
         android:layout_width="201dp"
         android:layout_height="248dp"
         android:contentDescription="@string/ClassicImg"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/imageView9"
+        app:layout_constraintStart_toEndOf="@+id/Trace_Image"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/itch_in_scitch_classic_image" />
 
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/menu_switch"
-        android:theme="@style/SwitchCompatStyle"
         android:layout_width="62dp"
         android:layout_height="33dp"
         android:layout_marginTop="32dp"
         android:scaleX="2"
         android:scaleY="2"
+        android:theme="@style/SwitchCompatStyle"
+        android:contentDescription="@string/Switch"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.446"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/Select_Mode_text"
         app:layout_constraintVertical_bias="0.0"
         tools:ignore="HardcodedText,UseSwitchCompatOrMaterialXml" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/Select_Mode_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
@@ -87,38 +88,39 @@
         android:textColor="#E31111"
         android:textSize="34sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/textView2"
+        app:layout_constraintBottom_toTopOf="@+id/Trace_text"
         app:layout_constraintEnd_toEndOf="@+id/Background_Image"
         app:layout_constraintHorizontal_bias="0.086"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/DrawButton" />
+        app:layout_constraintTop_toBottomOf="@+id/DrawButton"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/Trace_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="68dp"
         android:text="@string/trace"
         android:textColor="#F44336"
         android:textSize="34sp"
-        app:layout_constraintBottom_toTopOf="@+id/imageView9"
+        app:layout_constraintBottom_toTopOf="@+id/Trace_Image"
         app:layout_constraintEnd_toStartOf="@+id/menu_switch"
-        app:layout_constraintHorizontal_bias="0.597"
+        app:layout_constraintHorizontal_bias="0.558"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/DrawButton"
         app:layout_constraintVertical_bias="1.0" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/Classic_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="48dp"
         android:text="@string/classic"
         android:textColor="#F44336"
         android:textSize="34sp"
-        app:layout_constraintBottom_toTopOf="@+id/imageView10"
+        app:layout_constraintBottom_toTopOf="@+id/Classic_Image"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.65"
+        app:layout_constraintHorizontal_bias="0.615"
         app:layout_constraintStart_toEndOf="@+id/menu_switch"
         app:layout_constraintTop_toBottomOf="@+id/DrawButton"
         app:layout_constraintVertical_bias="1.0" />
