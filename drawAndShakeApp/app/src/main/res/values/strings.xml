@@ -7,4 +7,5 @@
     <string name="DrawButton" />
     <string name="ClassicImg" />
     <string name="TraceImg" />
+    <string name="Switch" />
 </resources>
