@@ -10,7 +10,9 @@ open class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+    }
+    override fun onStart(){
+        super.onStart()
         var drawState = false
         findViewById<ImageView>(R.id.Classic_Image).imageAlpha = 100
         findViewById<SwitchCompat>(R.id.menu_switch).setOnCheckedChangeListener { _, isChecked ->
@@ -28,8 +30,10 @@ open class MainActivity : AppCompatActivity() {
         findViewById<ImageButton>(R.id.DrawButton).setOnClickListener {
             if(!drawState){
                 println("this is trace mode")
+                TestActivity().onCreate()
             }else{
                 println("this is classic mode")
+                TestActivity().onCreate()
             }
         }
     }
