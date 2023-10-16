@@ -10,8 +10,9 @@ open class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        start()
     }
-    override fun onStart(){
+    private fun start(){
         super.onStart()
         var drawState = false
         findViewById<ImageView>(R.id.Classic_Image).imageAlpha = 100
@@ -29,11 +30,11 @@ open class MainActivity : AppCompatActivity() {
 
         findViewById<ImageButton>(R.id.DrawButton).setOnClickListener {
             if(!drawState){
-                println("this is trace mode")
-                TestActivity().onCreate()
+                setContentView(R.layout.activity_trace)
+                TraceActivity().create()
             }else{
-                println("this is classic mode")
-                TestActivity().onCreate()
+                setContentView(R.layout.activity_classic)
+                ClassicActivity().create()
             }
         }
     }
