@@ -27,7 +27,7 @@ open class MainActivity : AppCompatActivity() {
      * you guys probably don't need to make any more as if have made 3 (Trace, Classic, and main)
      * however this is where the xml layout and in are case save states will be checked and instantiated/created
      */
-    override fun /*more like fuck this*/ onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
     }
@@ -38,7 +38,7 @@ open class MainActivity : AppCompatActivity() {
      * I will aso go over what this code is doing
      * I create the animation for the mode select switch by see if it is one of of and then
      * changing the opacity of the corresponding image use a event listener
-     + I also use a event listener to check if the draw button is pressed
+     * I also use a event listener to check if the draw button is pressed
      * thin based on the state of the switch i load the corresponding activity
      */
     override fun onStart(){
