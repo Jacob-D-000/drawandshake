@@ -9,11 +9,13 @@ import androidx.appcompat.widget.SwitchCompat
 open class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        create()
+    }
+    fun create(){
         setContentView(R.layout.activity_main)
         start()
     }
     private fun start(){
-        super.onStart()
         var drawState = false
         findViewById<ImageView>(R.id.Classic_Image).imageAlpha = 100
         findViewById<SwitchCompat>(R.id.menu_switch).setOnCheckedChangeListener { _, isChecked ->
