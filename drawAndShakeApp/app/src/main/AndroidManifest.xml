@@ -12,6 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DrawAndShakeApp"
         tools:targetApi="31">
+        <!--This is how you add activity's to a android app-->
+        <!--main/menu activity-->
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -20,6 +22,16 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <!--Trace activity-->
+        <activity
+            android:name=".TraceActivity"
+            android:exported="true">
+        </activity>
+        <!--Classic activity-->
+        <activity
+            android:name=".ClassicActivity"
+            android:exported="true">
         </activity>
     </application>
 
