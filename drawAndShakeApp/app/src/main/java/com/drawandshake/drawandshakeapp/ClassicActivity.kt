@@ -17,9 +17,9 @@ class ClassicActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_classic)
-        DrawBackArrowEvent(this).backPressed()
     }
     override fun onStart(){
         super.onStart()
+        DrawBackArrowEvent(this).backPressed()
     }
 }

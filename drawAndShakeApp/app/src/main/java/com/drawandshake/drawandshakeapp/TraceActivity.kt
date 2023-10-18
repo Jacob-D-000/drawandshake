@@ -15,9 +15,9 @@ class TraceActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_trace)
-        DrawBackArrowEvent(this).backPressed()
     }
     override fun onStart(){
         super.onStart()
+        DrawBackArrowEvent(this).backPressed()
     }
 }
