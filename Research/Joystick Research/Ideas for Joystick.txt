@@ -1,6 +1,0 @@
-https://stackoverflow.com/questions/49150818/how-to-create-a-virtual-joystick-in-android-custom-view 
-
-
-Contains the following links
-https://developer.android.com/develop/ui/views/touch-and-input/drag-drop
-https://developer.android.com/develop/ui/views/animations/spring-animation#lifecycle-of-spring-animation
