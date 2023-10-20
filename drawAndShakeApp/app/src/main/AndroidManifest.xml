@@ -16,7 +16,8 @@
         <!--main/menu activity-->
         <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,12 +27,14 @@
         <!--Trace activity-->
         <activity
             android:name=".TraceActivity"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="landscape">
         </activity>
         <!--Classic activity-->
         <activity
             android:name=".ClassicActivity"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="landscape">
         </activity>
     </application>
 
