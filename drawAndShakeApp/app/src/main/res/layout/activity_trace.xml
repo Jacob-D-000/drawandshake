@@ -10,6 +10,7 @@
         android:id="@+id/BackArrow"
         android:layout_width="68dp"
         android:layout_height="43dp"
+        android:background="#00FFFFFF"
         android:contentDescription="@string/BackArrow"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

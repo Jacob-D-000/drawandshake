@@ -9,6 +9,7 @@
         android:id="@+id/BackArrow"
         android:layout_width="68dp"
         android:layout_height="43dp"
+        android:background="#00FFFFFF"
         android:contentDescription="@string/BackArrow"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -18,5 +19,64 @@
         app:layout_constraintVertical_bias="0.043"
         app:srcCompat="@drawable/back_arrow"
         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+
+    <ImageButton
+        android:id="@+id/leftButton"
+        android:layout_width="123dp"
+        android:layout_height="114dp"
+        android:background="#00FFFFFF"
+        android:scaleType="fitStart"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.026"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.946"
+        app:srcCompat="@drawable/outside_circle"
+        tools:ignore="SpeakableTextPresentCheck"
+        android:contentDescription="@string/leftbutton" />
+
+    <ImageView
+        android:id="@+id/leftButtonDerection"
+        android:layout_width="91dp"
+        android:layout_height="77dp"
+        app:layout_constraintBottom_toBottomOf="@+id/leftButton"
+        app:layout_constraintEnd_toEndOf="@+id/leftButton"
+        app:layout_constraintHorizontal_bias="0.437"
+        app:layout_constraintStart_toStartOf="@+id/leftButton"
+        app:layout_constraintTop_toTopOf="@+id/leftButton"
+        app:layout_constraintVertical_bias="0.405"
+        app:srcCompat="@drawable/horizontalbutton"
+        android:contentDescription="@string/leftbuttonderection" />
+
+    <ImageButton
+        android:id="@+id/rightButton"
+        android:layout_width="123dp"
+        android:layout_height="114dp"
+        android:background="#00FFFFFF"
+        android:scaleType="fitStart"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.973"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.946"
+        app:srcCompat="@drawable/outside_circle"
+        tools:ignore="SpeakableTextPresentCheck"
+        android:contentDescription="@string/rightbutton" />
+
+    <ImageView
+        android:id="@+id/rightButtonDerection"
+        android:layout_width="91dp"
+        android:layout_height="77dp"
+        android:rotation="90"
+        app:layout_constraintBottom_toBottomOf="@+id/rightButton"
+        app:layout_constraintEnd_toEndOf="@+id/rightButton"
+        app:layout_constraintHorizontal_bias="0.437"
+        app:layout_constraintStart_toStartOf="@+id/rightButton"
+        app:layout_constraintTop_toTopOf="@+id/rightButton"
+        app:layout_constraintVertical_bias="0.405"
+        app:srcCompat="@drawable/horizontalbutton"
+        android:contentDescription="@string/rightbuttonderection" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
