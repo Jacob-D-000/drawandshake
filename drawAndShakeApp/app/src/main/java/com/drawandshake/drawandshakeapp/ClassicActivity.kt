@@ -6,6 +6,7 @@ import android.view.MotionEvent
 import android.widget.ImageButton
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+import java.lang.System.out
 import kotlin.math.atan2
 
 /**********
@@ -22,6 +23,13 @@ class ClassicActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_classic)
+        System.out.println("X quor")
+        System.out.println(findViewById<ImageButton>(R.id.leftButton).x)
+        System.out.println(findViewById<ImageButton>(R.id.leftButton).width)
+        System.out.println("Y quor")
+        System.out.println(findViewById<ImageButton>(R.id.leftButton).y)
+        System.out.println(findViewById<ImageButton>(R.id.leftButton).height)
+
     }
     //negate button press for both nobs
     @SuppressLint("ClickableViewAccessibility", "CutPasteId")
@@ -38,10 +46,11 @@ class ClassicActivity : AppCompatActivity() {
 
                     val x = motionEvent.x
                     val y = motionEvent.y
+                    println("Finger X: " + x)
+                    println("Finger Y: " + y)
 
-                    val nobCenterX = findViewById<ImageButton>(R.id.leftButton).x + findViewById<ImageButton>(R.id.leftButton).width / 2
-                    val nobCenterY = findViewById<ImageButton>(R.id.leftButton).y + findViewById<ImageButton>(R.id.leftButton).height / 2
-
+                    val nobCenterX = (findViewById<ImageButton>(R.id.leftButton).x + findViewById<ImageButton>(R.id.leftButton).width) // 2
+                    val nobCenterY = (findViewById<ImageButton>(R.id.leftButton).y + findViewById<ImageButton>(R.id.leftButton).height) // 2
                     val angle = Math.toDegrees(atan2(y - nobCenterY, x - nobCenterX).toDouble())
 
                     findViewById<ImageButton>(R.id.leftButton).rotation = angle.toFloat()
