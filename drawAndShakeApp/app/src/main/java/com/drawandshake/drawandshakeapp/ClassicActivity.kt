@@ -46,14 +46,13 @@ class ClassicActivity : AppCompatActivity() {
 
                     val x: Float = motionEvent.x
                     val y: Float = motionEvent.y
-                    println("Finger X: " + x)
-                    println("Finger Y: " + y)
 
-                    val nobCenterX = (findViewById<ImageButton>(R.id.leftButton).x - findViewById<ImageButton>(R.id.leftButton).width) / 2
-                    val nobCenterY = (findViewById<ImageButton>(R.id.leftButton).y - findViewById<ImageButton>(R.id.leftButton).height) / 2
+                    val nobCenterX = (findViewById<ImageButton>(R.id.leftButton).x + findViewById<ImageButton>(R.id.leftButton).width) / 2
+                    val nobCenterY = (findViewById<ImageButton>(R.id.leftButton).y + findViewById<ImageButton>(R.id.leftButton).height) / 2
                     val angle = Math.toDegrees(atan2(y - nobCenterY, x - nobCenterX).toDouble())
 
                     findViewById<ImageButton>(R.id.leftButton).rotation = angle.toFloat()
+                    println(angle)
                 }
                 //when user lets go or the hold action is stopped
                 // it will reset the opacity of the direction image
