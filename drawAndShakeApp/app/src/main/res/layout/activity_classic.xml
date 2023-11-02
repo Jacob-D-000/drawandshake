@@ -34,10 +34,12 @@
         app:srcCompat="@drawable/outside_circle"
         tools:ignore="SpeakableTextPresentCheck" />
 
-    <ImageView
+    <ImageButton
         android:id="@+id/leftButtonDerection"
         android:layout_width="91dp"
         android:layout_height="77dp"
+        android:background="#00FFFFFF"
+        android:scaleType="fitStart"
         app:layout_constraintBottom_toBottomOf="@+id/leftButton"
         app:layout_constraintEnd_toEndOf="@+id/leftButton"
         app:layout_constraintHorizontal_bias="0.437"
