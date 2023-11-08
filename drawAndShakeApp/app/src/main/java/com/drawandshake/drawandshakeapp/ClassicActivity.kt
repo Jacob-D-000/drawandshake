@@ -1,12 +1,15 @@
 package com.drawandshake.drawandshakeapp
 
 import android.annotation.SuppressLint
+import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
+import android.hardware.SensorManager
 import android.os.Bundle
 import android.view.MotionEvent
 import android.widget.ImageButton
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
-import java.lang.System.out
 import kotlin.math.atan2
 
 /**********
@@ -19,17 +22,12 @@ import kotlin.math.atan2
  * I also call the Fucktion DrawBackArrow().backPressed() - i will go over that in the file its self
  */
 
-class ClassicActivity : AppCompatActivity() {
+class ClassicActivity : AppCompatActivity(), SensorEventListener {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_classic)
-        System.out.println("X quor")
-        System.out.println(findViewById<ImageButton>(R.id.leftButton).x)
-        System.out.println(findViewById<ImageButton>(R.id.leftButton).width)
-        System.out.println("Y quor")
-        System.out.println(findViewById<ImageButton>(R.id.leftButton).y)
-        System.out.println(findViewById<ImageButton>(R.id.leftButton).height)
-
+        SensorActivity()
     }
     //negate button press for both nobs
     @SuppressLint("ClickableViewAccessibility", "CutPasteId")
@@ -52,7 +50,6 @@ class ClassicActivity : AppCompatActivity() {
                     val angle = Math.toDegrees(atan2(y - nobCenterY, x - nobCenterX).toDouble())
 
                     findViewById<ImageButton>(R.id.leftButton).rotation = angle.toFloat()
-                    println(angle)
                 }
                 //when user lets go or the hold action is stopped
                 // it will reset the opacity of the direction image
@@ -79,5 +76,24 @@ class ClassicActivity : AppCompatActivity() {
             }
             false
         }
+    }
+
+    private var mSensorManager: SensorManager? = null
+    private var mAccelerometer: Sensor? = null
+
+    fun SensorActivity() {
+        mSensorManager = getSystemService(SENSOR_SERVICE) as SensorManager
+        mAccelerometer = mSensorManager!!.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
+    }
+    override fun onSensorChanged(event : SensorEvent?) {
+        val axisX = event!!.values[0]
+        val axisY = event!!.values[1]
+        val axisZ = event!!.values[2]
+
+        println(axisX)
+    }
+
+    override fun onAccuracyChanged(p0: Sensor?, p1: Int) {
+        TODO("Not yet implemented")
     }
 }
