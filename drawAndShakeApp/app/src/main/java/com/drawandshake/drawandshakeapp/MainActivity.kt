@@ -1,7 +1,9 @@
 package com.drawandshake.drawandshakeapp
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.view.MotionEvent
 import android.widget.ImageButton
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
@@ -41,6 +43,8 @@ open class MainActivity : AppCompatActivity() {
      * I also use a event listener to check if the draw button is pressed
      * thin based on the state of the switch i load the corresponding activity
      */
+    //negates on click events for draw button
+    @SuppressLint("ClickableViewAccessibility")
     override fun onStart(){
         super.onStart()
         //boolean to track switch state
@@ -61,20 +65,31 @@ open class MainActivity : AppCompatActivity() {
             }
         }
 
-        //draw button event listener
-        findViewById<ImageButton>(R.id.DrawButton).setOnClickListener {
-            if(!drawState){
-                /**
-                 * here we use java in kotlin WOOOW
-                 * so what this is doing is making a new activity(trace or classic)
-                 * we initialize it then start it
-                 */
-                val intent = Intent(this, TraceActivity::class.java)
-                startActivity(intent)
-            }else{
-                val intent = Intent(this, ClassicActivity::class.java)
-                startActivity(intent)
+        //On touch listener for draw button
+        findViewById<ImageButton>(R.id.DrawButton).setOnTouchListener { _, motionEvent ->
+            //Will happen when image is pressed other wise event is set to false
+            when (motionEvent.action){
+                //change opacity of image when user holds finger on image
+                MotionEvent.ACTION_DOWN -> {
+                    findViewById<ImageButton>(R.id.DrawButton).alpha = 0.5f
+                }
+                //when user lets go or the hold action is stoped it will loud the proper page
+                MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
+                    if(!drawState){
+                        /**
+                         * here we use java in kotlin WOOOW
+                         * so what this is doing is making a new activity(trace or classic)
+                         * we initialize it then start it
+                         */
+                        val intent = Intent(this, TraceActivity::class.java)
+                        startActivity(intent)
+                    }else{
+                        val intent = Intent(this, ClassicActivity::class.java)
+                        startActivity(intent)
+                    }
+                }
             }
+            false
         }
     }
 }
