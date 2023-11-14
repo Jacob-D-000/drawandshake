@@ -7,8 +7,11 @@ import android.graphics.Paint
 
 import android.os.Bundle
 import android.util.DisplayMetrics
+import android.view.MotionEvent
+import android.widget.ImageButton
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+import kotlin.math.atan2
 
 /**********
  * Liam Notes
@@ -27,6 +30,13 @@ class TraceActivity : AppCompatActivity() {
         // Initialize and start listening for shake events (Liam's Code)
         ShakeDetector(this).start()
 
+    }
+    
+    override fun onStart()
+    {
+        super.onStart()
+        DrawBackArrowEvent(this).backPressed()
+
         val drawingCanvasId = findViewById<ImageView>(R.id.drawingCanvas)
 
         val displayMetrics = resources.displayMetrics
@@ -42,19 +52,48 @@ class TraceActivity : AppCompatActivity() {
         // Example: Draw a red circle on the Canvas
         val paint = Paint()
         paint.color = Color.RED
-        traceCanvas.drawCircle(250f, 250f, 100f, paint)
-        traceCanvas.drawCircle(1000f, 1000f, 10f, paint)
+//        traceCanvas.drawCircle(250f, 250f, 100f, paint)
+//        traceCanvas.drawCircle(1000f, 1000f, 10f, paint)
 
         drawingCanvasId.setImageBitmap(bitmap)
 
-    }
-    
-    override fun onStart()
-    {
-        super.onStart()
-        DrawBackArrowEvent(this).backPressed()
-        println("Height: " + findViewById<ImageView>(R.id.drawingCanvas).height)
-        println("Width: " + findViewById<ImageView>(R.id.drawingCanvas).width)
+        var firstTime : Boolean = true
+
+
+        findViewById<ImageView>(R.id.drawingCanvas).setOnTouchListener { _, motionEvent ->
+
+            when (motionEvent.action)
+            {
+                MotionEvent.ACTION_DOWN, MotionEvent.ACTION_MOVE -> {
+
+
+                    if (firstTime)
+                    {
+                        println("FIRST TIME TOUCH DOWN")
+                        var prevX = motionEvent.x
+                        var prevY = motionEvent.y
+                        firstTime = false
+                    }
+                    
+                    var x = motionEvent.x
+                    var y = motionEvent.y
+
+                    traceCanvas.drawCircle(x,y,10f,paint)
+//                    traceCanvas.drawLine(prevX,prevY,x,y)
+                    drawingCanvasId.setImageBitmap(bitmap)
+//                    var prevX = x
+//                    var prevY = y
+//
+//                    println(prevX + ": " + prevX)
+//                    println(prevY + ": " + prevY)
+                }
+                MotionEvent.ACTION_UP -> {
+                    firstTime = true
+                }
+            }
+            true
+        }
+
     }
     
     // Liams code 
