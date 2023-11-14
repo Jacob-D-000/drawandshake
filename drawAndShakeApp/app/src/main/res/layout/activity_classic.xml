@@ -21,20 +21,6 @@
         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
     <ImageButton
-        android:id="@+id/leftButton"
-        android:layout_width="123dp"
-        android:layout_height="114dp"
-        android:background="#00FFFFFF"
-        android:contentDescription="@string/leftbutton"
-        android:scaleType="fitStart"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/outside_circle"
-        tools:ignore="SpeakableTextPresentCheck" />
-
-    <ImageButton
         android:id="@+id/leftButtonDerection"
         android:layout_width="91dp"
         android:layout_height="77dp"
@@ -45,8 +31,24 @@
         app:layout_constraintEnd_toEndOf="@+id/leftButton"
         app:layout_constraintStart_toStartOf="@+id/leftButton"
         app:layout_constraintTop_toTopOf="@+id/leftButton"
-        app:layout_constraintVertical_bias="0.486"
+        app:layout_constraintVertical_bias="0.54"
         app:srcCompat="@drawable/horizontalbutton" />
+
+    <ImageButton
+        android:id="@+id/leftButton"
+        android:layout_width="123dp"
+        android:layout_height="114dp"
+        android:background="#00FFFFFF"
+        android:contentDescription="@string/leftbutton"
+        android:scaleType="fitStart"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.026"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.949"
+        app:srcCompat="@drawable/outside_circle"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <ImageButton
         android:id="@+id/rightButton"
