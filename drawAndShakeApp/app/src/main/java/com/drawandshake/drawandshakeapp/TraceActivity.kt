@@ -24,6 +24,9 @@ class TraceActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_trace)
 
+        // Initialize and start listening for shake events (Liam's Code)
+        ShakeDetector(this).start()
+
         val drawingCanvasId = findViewById<ImageView>(R.id.drawingCanvas)
 
         val displayMetrics = resources.displayMetrics
@@ -43,13 +46,21 @@ class TraceActivity : AppCompatActivity() {
         traceCanvas.drawCircle(1000f, 1000f, 10f, paint)
 
         drawingCanvasId.setImageBitmap(bitmap)
-    }
 
+    }
+    
     override fun onStart()
     {
         super.onStart()
         DrawBackArrowEvent(this).backPressed()
         println("Height: " + findViewById<ImageView>(R.id.drawingCanvas).height)
         println("Width: " + findViewById<ImageView>(R.id.drawingCanvas).width)
+    }
+    
+    // Liams code 
+    override fun onDestroy() {
+        // Stop listening for shake events when the activity is destroyed
+        ShakeDetector(this).stop()
+        super.onDestroy()
     }
 }
