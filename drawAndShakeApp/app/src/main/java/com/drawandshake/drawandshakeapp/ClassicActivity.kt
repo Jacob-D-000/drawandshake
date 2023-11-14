@@ -1,10 +1,6 @@
 package com.drawandshake.drawandshakeapp
 
 import android.annotation.SuppressLint
-import android.hardware.Sensor
-import android.hardware.SensorEvent
-import android.hardware.SensorEventListener
-import android.hardware.SensorManager
 import android.os.Bundle
 import android.view.MotionEvent
 import android.widget.ImageButton
@@ -22,12 +18,12 @@ import kotlin.math.atan2
  * I also call the Fucktion DrawBackArrow().backPressed() - i will go over that in the file its self
  */
 
-class ClassicActivity : AppCompatActivity(), SensorEventListener {
-
+class ClassicActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_classic)
-        SensorActivity()
+        // Initialize and start listening for shake events
+        ShakeDetector(this).start()
     }
     //negate button press for both nobs
     @SuppressLint("ClickableViewAccessibility", "CutPasteId")
@@ -77,23 +73,9 @@ class ClassicActivity : AppCompatActivity(), SensorEventListener {
             false
         }
     }
-
-    private var mSensorManager: SensorManager? = null
-    private var mAccelerometer: Sensor? = null
-
-    fun SensorActivity() {
-        mSensorManager = getSystemService(SENSOR_SERVICE) as SensorManager
-        mAccelerometer = mSensorManager!!.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
-    }
-    override fun onSensorChanged(event : SensorEvent?) {
-        val axisX = event!!.values[0]
-        val axisY = event!!.values[1]
-        val axisZ = event!!.values[2]
-
-        println(axisX)
-    }
-
-    override fun onAccuracyChanged(p0: Sensor?, p1: Int) {
-        TODO("Not yet implemented")
+    override fun onDestroy() {
+        // Stop listening for shake events when the activity is destroyed
+        ShakeDetector(this).stop()
+        super.onDestroy()
     }
 }

@@ -15,9 +15,16 @@ class TraceActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_trace)
+        // Initialize and start listening for shake events
+        ShakeDetector(this).start()
     }
     override fun onStart(){
         super.onStart()
         DrawBackArrowEvent(this).backPressed()
+    }
+    override fun onDestroy() {
+        // Stop listening for shake events when the activity is destroyed
+        ShakeDetector(this).stop()
+        super.onDestroy()
     }
 }
