@@ -6,13 +6,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <resources>
-    </resources>
+    <ImageView
+        android:id="@+id/drawingCanvas"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/BackArrow"
         android:layout_width="68dp"
         android:layout_height="43dp"
+        android:background="#00FFFFFF"
         android:contentDescription="@string/BackArrow"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -22,4 +29,7 @@
         app:layout_constraintVertical_bias="0.043"
         app:srcCompat="@drawable/back_arrow"
         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

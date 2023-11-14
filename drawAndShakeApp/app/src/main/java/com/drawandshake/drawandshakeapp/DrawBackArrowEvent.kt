@@ -1,6 +1,8 @@
 package com.drawandshake.drawandshakeapp
 
+import android.annotation.SuppressLint
 import android.content.Intent
+import android.view.MotionEvent
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 
@@ -16,10 +18,24 @@ import androidx.appcompat.app.AppCompatActivity
  * when the button is pressed it loads the menu activity
  */
 class DrawBackArrowEvent(private val activity: AppCompatActivity){
+    //negates on click events for back arrow button
+    @SuppressLint("ClickableViewAccessibility")
     fun backPressed() {
-        activity.findViewById<ImageButton>(R.id.BackArrow).setOnClickListener(){
-            val intent = Intent(activity, MainActivity::class.java)
-            activity.startActivity(intent)
+        //On touch listener for Back arrow button
+        activity.findViewById<ImageButton>(R.id.BackArrow).setOnTouchListener { _, motionEvent ->
+            //Will happen when image is pressed other wise event is set to false
+            when (motionEvent.action){
+                //change opacity of image when user holds finger on image
+                MotionEvent.ACTION_DOWN -> {
+                    activity.findViewById<ImageButton>(R.id.BackArrow).alpha = 0.5f
+                }
+                //when user lets go or the hold action is stoped it will loud the proper page
+                MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
+                    val intent = Intent(activity, MainActivity::class.java)
+                    activity.startActivity(intent)
+                }
+            }
+            false
         }
     }
 }
