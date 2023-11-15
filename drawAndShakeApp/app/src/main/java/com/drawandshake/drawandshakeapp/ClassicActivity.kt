@@ -23,7 +23,7 @@ class ClassicActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_classic)
         // Initialize and start listening for shake events
-        ShakeDetector(this).start()
+//        ShakeDetector(this).start()
     }
     //negate button press for both nobs
     @SuppressLint("ClickableViewAccessibility", "CutPasteId")
@@ -75,7 +75,7 @@ class ClassicActivity : AppCompatActivity() {
     }
     override fun onDestroy() {
         // Stop listening for shake events when the activity is destroyed
-        ShakeDetector(this).stop()
+//        ShakeDetector(this).stop()
         super.onDestroy()
     }
 }

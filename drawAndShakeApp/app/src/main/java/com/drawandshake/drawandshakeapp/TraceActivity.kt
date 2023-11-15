@@ -22,13 +22,33 @@ import kotlin.math.atan2
  * I also call the Fucktion DrawBackArrow().backPressed() here as well - i will go over that in the file its self
  */
 class TraceActivity : AppCompatActivity() {
+
+    var oldX = 0f
+
+    var oldY = 0f
+    fun getOldDrawX() : Float {
+        return oldX
+    }
+
+    fun setOldDrawX(x : Float) {
+        this.oldX = x
+    }
+
+    fun getOldDrawY() : Float {
+        return oldY;
+    }
+
+    fun setOldDrawY(y : Float) {
+        this.oldY = y
+    }
+
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_trace)
 
         // Initialize and start listening for shake events (Liam's Code)
-        ShakeDetector(this).start()
+
 
     }
     
@@ -45,9 +65,10 @@ class TraceActivity : AppCompatActivity() {
         println("Width: $screenWidth")
         println("Height: $screenHeight")
 
-
         val bitmap: Bitmap = Bitmap.createBitmap(screenWidth, screenHeight,Bitmap.Config.ARGB_8888)
         val traceCanvas = Canvas(bitmap)
+
+        ShakeDetector(this, traceCanvas).start()
 
         // Example: Draw a red circle on the Canvas
         val paint = Paint()
@@ -68,27 +89,28 @@ class TraceActivity : AppCompatActivity() {
 
 
                     if (firstTime)
-                    {
+                     {
                         println("FIRST TIME TOUCH DOWN")
-                        var prevX = motionEvent.x
-                        var prevY = motionEvent.y
+                        setOldDrawX(motionEvent.x)
+                        setOldDrawY(motionEvent.y)
                         firstTime = false
                     }
                     
                     var x = motionEvent.x
                     var y = motionEvent.y
 
-                    traceCanvas.drawCircle(x,y,10f,paint)
+                    traceCanvas.drawLine(getOldDrawX(), getOldDrawY(), x, y, paint)
 //                    traceCanvas.drawLine(prevX,prevY,x,y)
                     drawingCanvasId.setImageBitmap(bitmap)
-//                    var prevX = x
-//                    var prevY = y
+                    setOldDrawX(x)
+                    setOldDrawY(y)
 //
 //                    println(prevX + ": " + prevX)
 //                    println(prevY + ": " + prevY)
                 }
                 MotionEvent.ACTION_UP -> {
                     firstTime = true
+                    traceCanvas.drawColor(Color.WHITE)
                 }
             }
             true
@@ -99,20 +121,7 @@ class TraceActivity : AppCompatActivity() {
     // Liams code 
     override fun onDestroy() {
         // Stop listening for shake events when the activity is destroyed
-        ShakeDetector(this).stop()
+
         super.onDestroy()
     }
-
-    override fun onTouchEvent(event: MotionEvent?): Boolean {
-        when (event?.action){
-            MotionEvent.ACTION_DOWN, MotionEvent.ACTION_MOVE -> {
-                val x: Float = event.x
-                val y: Float = event.y
-
-            }
-        }
-        return super.onTouchEvent(event)
-    }
-
-
 }
