@@ -67,6 +67,7 @@ class TraceActivity : AppCompatActivity() {
 
         val bitmap: Bitmap = Bitmap.createBitmap(screenWidth, screenHeight,Bitmap.Config.ARGB_8888)
         val traceCanvas = Canvas(bitmap)
+        traceCanvas.drawColor(Color.WHITE)
 
         ShakeDetector(this, traceCanvas, bitmap, drawingCanvasId).start()
 

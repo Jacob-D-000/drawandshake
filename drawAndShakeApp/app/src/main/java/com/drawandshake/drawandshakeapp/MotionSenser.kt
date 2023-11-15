@@ -85,7 +85,7 @@ class ShakeDetector(private val context : Context, private val canvas: Canvas, p
     companion object {
         //may need to be changed dont now oh sensitive it is
         // Threshold values for shake detection
-        private const val SHAKE_THRESHOLD = 5.0
+        private const val SHAKE_THRESHOLD = 30.0
         private const val SHAKE_THRESHOLD_TIME = 100 // in milliseconds
     }
 }
