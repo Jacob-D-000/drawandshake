@@ -68,11 +68,12 @@ class TraceActivity : AppCompatActivity() {
         val bitmap: Bitmap = Bitmap.createBitmap(screenWidth, screenHeight,Bitmap.Config.ARGB_8888)
         val traceCanvas = Canvas(bitmap)
 
-        ShakeDetector(this, traceCanvas).start()
+        ShakeDetector(this, traceCanvas, bitmap, drawingCanvasId).start()
 
         // Example: Draw a red circle on the Canvas
         val paint = Paint()
-        paint.color = Color.RED
+        paint.color = Color.BLACK
+        paint.strokeWidth = 10f
 //        traceCanvas.drawCircle(250f, 250f, 100f, paint)
 //        traceCanvas.drawCircle(1000f, 1000f, 10f, paint)
 
@@ -110,7 +111,7 @@ class TraceActivity : AppCompatActivity() {
                 }
                 MotionEvent.ACTION_UP -> {
                     firstTime = true
-                    traceCanvas.drawColor(Color.WHITE)
+//                    traceCanvas.drawColor(Color.WHITE)
                 }
             }
             true

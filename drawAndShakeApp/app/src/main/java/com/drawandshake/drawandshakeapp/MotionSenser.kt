@@ -1,6 +1,7 @@
 package com.drawandshake.drawandshakeapp
 
 import android.content.Context
+import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
 import android.hardware.Sensor
@@ -8,8 +9,9 @@ import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.view.View
+import android.widget.ImageView
 
-class ShakeDetector(private val context : Context, private val canvas: Canvas) : SensorEventListener{
+class ShakeDetector(private val context : Context, private val canvas: Canvas, private val bitmap : Bitmap, private val view : View) : SensorEventListener{
     //make sesor listiner and manager
     private var sensorManager: SensorManager? = null
     private var accelerometer: Sensor? = null
@@ -69,7 +71,7 @@ class ShakeDetector(private val context : Context, private val canvas: Canvas) :
                     //delet function gose here
                     println("Shake detected!")
                     canvas.drawColor(Color.WHITE)
-                    context.invalidate()
+                    view.findViewById<ImageView>(R.id.drawingCanvas).setImageBitmap(bitmap)
                 }
 
                 // Update last values and time
