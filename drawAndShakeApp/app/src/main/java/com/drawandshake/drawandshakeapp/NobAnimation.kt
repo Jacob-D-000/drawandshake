@@ -5,7 +5,7 @@ import android.view.MotionEvent
 import android.widget.ImageButton
 import kotlin.math.atan2
 
-class NobAnimation(private var nob: ImageButton, private var nobD: ImageButton, var nobDef: Float) {
+class NobAnimation(private var nob: ImageButton, private var nobD: ImageButton, private var nobDef: Float) {
     @SuppressLint("ClickableViewAccessibility")
     fun animation(){
         nobD.setOnTouchListener { _, motionEvent ->
