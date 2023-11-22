@@ -18,12 +18,18 @@ class ClassicActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_classic)
+        DrawBackArrowEvent(this).backPressed()
     }
     //negate button press for both nobs
     @SuppressLint("ClickableViewAccessibility", "CutPasteId")
     override fun onStart(){
         super.onStart()
-        DrawBackArrowEvent(this).backPressed()
+
+        val canvas = DrawCanvas(this)
+        ShakeDetector(this, canvas.getTraceCanvas(), canvas.getBitMap(), canvas.getCanvasID()).start()
+        canvas.create()
+        canvas.classicCanvas()
+
         NobAnimation(findViewById(R.id.leftButton),findViewById(R.id.leftButtonDerection), 0f).animation()
         NobAnimation(findViewById(R.id.rightButton), findViewById(R.id.rightButtonDerection),90f).animation()
     }

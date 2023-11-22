@@ -58,6 +58,10 @@ class DrawCanvas(private val activity: AppCompatActivity) {
             true
         }
     }
+
+    fun classicCanvas(){
+
+    }
     private fun getOldDrawX() : Float {
         return this.oldX
     }
