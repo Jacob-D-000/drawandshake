@@ -64,7 +64,7 @@ class ShakeDetector(context : Context, private val canvas: Canvas, private val b
 
                 // Check if the total movement is above the threshold
                 if (totalMovement > SHAKE_THRESHOLD) {
-                    //delet function gose here
+                    //delete function goes here
                     println("Shake detected!")
                     canvas.drawColor(Color.WHITE)
                     view.findViewById<ImageView>(R.id.drawingCanvas).setImageBitmap(bitmap)
