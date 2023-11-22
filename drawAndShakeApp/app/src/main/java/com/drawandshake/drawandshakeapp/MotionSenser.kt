@@ -10,8 +10,9 @@ import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.view.View
 import android.widget.ImageView
+import kotlin.math.sqrt
 
-class ShakeDetector(private val context : Context, private val canvas: Canvas, private val bitmap : Bitmap, private val view : View) : SensorEventListener{
+class ShakeDetector(context : Context, private val canvas: Canvas, private val bitmap : Bitmap, private val view : View) : SensorEventListener{
     //make sesor listiner and manager
     private var sensorManager: SensorManager? = null
     private var accelerometer: Sensor? = null
@@ -33,11 +34,6 @@ class ShakeDetector(private val context : Context, private val canvas: Canvas, p
         accelerometer?.also { accelSensor ->
             sensorManager?.registerListener(this, accelSensor, SensorManager.SENSOR_DELAY_NORMAL)
         }
-    }
-
-    fun stop() {
-        // Unregister the accelerometer sensor listener
-        sensorManager?.unregisterListener(this)
     }
 
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
@@ -64,11 +60,11 @@ class ShakeDetector(private val context : Context, private val canvas: Canvas, p
                 val deltaZ = z - lastZ
 
                 // Calculate total movement
-                val totalMovement = Math.sqrt((deltaX * deltaX + deltaY * deltaY + deltaZ * deltaZ).toDouble())
+                val totalMovement = sqrt((deltaX * deltaX + deltaY * deltaY + deltaZ * deltaZ).toDouble())
 
                 // Check if the total movement is above the threshold
                 if (totalMovement > SHAKE_THRESHOLD) {
-                    //delet function gose here
+                    //delete function goes here
                     println("Shake detected!")
                     canvas.drawColor(Color.WHITE)
                     view.findViewById<ImageView>(R.id.drawingCanvas).setImageBitmap(bitmap)

@@ -5,6 +5,15 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <ImageView
+        android:id="@+id/drawingCanvas"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ImageButton
         android:id="@+id/BackArrow"
         android:layout_width="68dp"
@@ -55,6 +64,22 @@
         android:contentDescription="@string/rightbutton" />
 
     <ImageButton
+        android:id="@+id/rightButtonDerection"
+        android:layout_width="91dp"
+        android:layout_height="77dp"
+        android:background="#00FFFFFF"
+        android:contentDescription="@string/rightbuttonderection"
+        android:rotation="90"
+        android:scaleType="fitStart"
+        app:layout_constraintBottom_toBottomOf="@+id/rightButton"
+        app:layout_constraintEnd_toEndOf="@+id/rightButton"
+        app:layout_constraintHorizontal_bias="0.343"
+        app:layout_constraintStart_toStartOf="@+id/rightButton"
+        app:layout_constraintTop_toTopOf="@+id/rightButton"
+        app:layout_constraintVertical_bias="0.594"
+        app:srcCompat="@drawable/horizontalbutton" />
+
+    <ImageButton
         android:id="@+id/leftButtonDerection"
         android:layout_width="91dp"
         android:layout_height="77dp"
@@ -67,20 +92,5 @@
         app:layout_constraintTop_toTopOf="@+id/leftButton"
         app:layout_constraintVertical_bias="0.54"
         app:srcCompat="@drawable/horizontalbutton" />
-
-    <ImageView
-        android:id="@+id/rightButtonDerection"
-        android:layout_width="91dp"
-        android:layout_height="77dp"
-        android:contentDescription="@string/rightbuttonderection"
-        android:rotation="90"
-        app:layout_constraintBottom_toBottomOf="@+id/rightButton"
-        app:layout_constraintEnd_toEndOf="@+id/rightButton"
-        app:layout_constraintHorizontal_bias="0.343"
-        app:layout_constraintStart_toStartOf="@+id/rightButton"
-        app:layout_constraintTop_toTopOf="@+id/rightButton"
-        app:layout_constraintVertical_bias="0.594"
-        app:srcCompat="@drawable/horizontalbutton" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
