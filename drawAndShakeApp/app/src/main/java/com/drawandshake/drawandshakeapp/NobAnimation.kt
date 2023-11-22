@@ -17,21 +17,29 @@ class NobAnimation(private var nob: ImageButton, private var nobD: ImageButton, 
 
                     val x: Float = motionEvent.x
                     val y: Float = motionEvent.y
-
                     val nobCenterX = nob.width / 2
                     val nobCenterY = nob.height / 2
                     val angle = Math.toDegrees(atan2(y - nobCenterY, x - nobCenterX).toDouble()) + nobDef //counteract preset angle for right nob
 
-                    nob.rotation = angle.toFloat()
+                    setRotation(angle.toFloat())
+                    //nob.rotation = angle.toFloat()
                 }
                 //when user lets go or the hold action is stopped
                 // it will reset the opacity of the direction image
                 MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
                     nobD.alpha = 1.0f
-                    nob.rotation = 0f
                 }
             }
             false
         }
+    }
+
+    fun getRotation() : Float
+    {
+        return this.nob.rotation
+    }
+
+    fun setRotation(r : Float){
+        this.nob.rotation = r
     }
 }

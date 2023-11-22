@@ -27,9 +27,9 @@ class ClassicActivity : AppCompatActivity() {
 
         val canvas = ClassicDraw(this)
         ShakeDetector(this, canvas.getTraceCanvas(), canvas.getBitMap(), canvas.getCanvasID()).start()
-        canvas.create()
-        canvas.classicCanvas()
         NobAnimation(findViewById(R.id.leftButton),findViewById(R.id.leftButtonDirection), 0f).animation()
         NobAnimation(findViewById(R.id.rightButton), findViewById(R.id.rightButtonDirection),90f).animation()
+        canvas.create()
+        canvas.classicCanvas()
     }
 }
