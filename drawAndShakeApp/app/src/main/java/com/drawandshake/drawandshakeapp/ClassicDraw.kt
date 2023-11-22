@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 
 class ClassicDraw(private val activity: AppCompatActivity) : DrawCanvas(activity) {
     @SuppressLint("ClickableViewAccessibility")
-    fun classicCanvas()
+    fun classicCanvas(leftRotation : Float, rightRotation : Float)
     {
         // leftButtonDirection is the image that DISAPPEARS when held
         // leftButton is the image that ROTATES when held
