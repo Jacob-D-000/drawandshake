@@ -9,6 +9,7 @@
         android:id="@+id/drawingCanvas"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:contentDescription="@string/BackArrow"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,7 +35,7 @@
         android:layout_width="123dp"
         android:layout_height="114dp"
         android:background="#00FFFFFF"
-        android:contentDescription="@string/leftbutton"
+        android:contentDescription="@string/LeftButton"
         android:scaleType="fitStart"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -61,14 +62,14 @@
         app:layout_constraintVertical_bias="0.946"
         app:srcCompat="@drawable/outside_circle"
         tools:ignore="SpeakableTextPresentCheck"
-        android:contentDescription="@string/rightbutton" />
+        android:contentDescription="@string/RightButton" />
 
     <ImageButton
-        android:id="@+id/rightButtonDerection"
+        android:id="@+id/rightButtonDirection"
         android:layout_width="91dp"
         android:layout_height="77dp"
         android:background="#00FFFFFF"
-        android:contentDescription="@string/rightbuttonderection"
+        android:contentDescription="@string/RightButtonDirection"
         android:rotation="90"
         android:scaleType="fitStart"
         app:layout_constraintBottom_toBottomOf="@+id/rightButton"
@@ -80,11 +81,11 @@
         app:srcCompat="@drawable/horizontalbutton" />
 
     <ImageButton
-        android:id="@+id/leftButtonDerection"
+        android:id="@+id/leftButtonDirection"
         android:layout_width="91dp"
         android:layout_height="77dp"
         android:background="#00FFFFFF"
-        android:contentDescription="@string/leftbuttonderection"
+        android:contentDescription="@string/LeftButtonDirection"
         android:scaleType="fitStart"
         app:layout_constraintBottom_toBottomOf="@+id/leftButton"
         app:layout_constraintEnd_toEndOf="@+id/leftButton"

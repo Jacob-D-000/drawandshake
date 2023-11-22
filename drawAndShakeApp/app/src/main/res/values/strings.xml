@@ -9,8 +9,8 @@
     <string name="TraceImg" />
     <string name="Switch" />
     <string name="BackArrow" />
-    <string name="leftbuttonderection">LeftButtonDerection</string>
-    <string name="leftbutton">LeftButton</string>
-    <string name="rightbutton">RightButton</string>
-    <string name="rightbuttonderection">RightButtonDerection</string>
+    <string name="LeftButton">LeftButton</string>
+    <string name="RightButton">RightButton</string>
+    <string name="RightButtonDirection">RightButtonDirection</string>
+    <string name="LeftButtonDirection">LeftButtonDirection</string>
 </resources>

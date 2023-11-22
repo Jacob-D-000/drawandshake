@@ -7,6 +7,9 @@ import androidx.appcompat.app.AppCompatActivity
 
 class ClassicDraw(private val activity: AppCompatActivity) : DrawCanvas(activity) {
     @SuppressLint("ClickableViewAccessibility")
-    fun classicCanvas() {
+    fun classicCanvas()
+    {
+
+
     }
 }

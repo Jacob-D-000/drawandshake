@@ -29,8 +29,7 @@ class ClassicActivity : AppCompatActivity() {
         ShakeDetector(this, canvas.getTraceCanvas(), canvas.getBitMap(), canvas.getCanvasID()).start()
         canvas.create()
         canvas.classicCanvas()
-
-        NobAnimation(findViewById(R.id.leftButton),findViewById(R.id.leftButtonDerection), 0f).animation()
-        NobAnimation(findViewById(R.id.rightButton), findViewById(R.id.rightButtonDerection),90f).animation()
+        NobAnimation(findViewById(R.id.leftButton),findViewById(R.id.leftButtonDirection), 0f).animation()
+        NobAnimation(findViewById(R.id.rightButton), findViewById(R.id.rightButtonDirection),90f).animation()
     }
 }
