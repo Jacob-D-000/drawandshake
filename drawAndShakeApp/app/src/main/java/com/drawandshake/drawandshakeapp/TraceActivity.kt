@@ -24,7 +24,7 @@ class TraceActivity : AppCompatActivity() {
     override fun onStart()
     {
         super.onStart()
-        val canvas = DrawCanvas(this)
+        val canvas = TraceDraw(this)
         ShakeDetector(this, canvas.getTraceCanvas(), canvas.getBitMap(), canvas.getCanvasID()).start()
         canvas.create()
         canvas.traceCanvas()

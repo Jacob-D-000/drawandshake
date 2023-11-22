@@ -25,7 +25,7 @@ class ClassicActivity : AppCompatActivity() {
     override fun onStart(){
         super.onStart()
 
-        val canvas = DrawCanvas(this)
+        val canvas = ClassicDraw(this)
         ShakeDetector(this, canvas.getTraceCanvas(), canvas.getBitMap(), canvas.getCanvasID()).start()
         canvas.create()
         canvas.classicCanvas()
