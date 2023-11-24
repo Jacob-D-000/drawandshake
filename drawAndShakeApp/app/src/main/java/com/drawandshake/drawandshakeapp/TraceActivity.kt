@@ -25,7 +25,7 @@ class TraceActivity : AppCompatActivity() {
     {
         super.onStart()
         val canvas = TraceDraw(this)
-        ShakeDetector(this, canvas.getTraceCanvas(), canvas.getBitMap(), canvas.getCanvasID()).start()
+        ShakeDetector(this, canvas.getCanvas(), canvas.getBitMap(), canvas.getCanvasID()).start()
         canvas.create()
         canvas.traceCanvas()
     }

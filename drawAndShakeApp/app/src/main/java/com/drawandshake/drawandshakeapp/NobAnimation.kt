@@ -5,15 +5,27 @@ import android.view.MotionEvent
 import android.widget.ImageButton
 import kotlin.math.atan2
 
-class NobAnimation(private var nob: ImageButton, private var nobD: ImageButton, private var nobDef: Float) {
+class NobAnimation(
+    private var nob: ImageButton,
+    private var nobD: ImageButton,
+    private var nobDef: Float,
+    private var isTouch: Boolean,
+    private var derection: Boolean,
+    private var canvas: ClassicDraw
+) {
     @SuppressLint("ClickableViewAccessibility")
     fun animation(){
+        setDirection(derection)
+        var firstTime = true
+
         nobD.setOnTouchListener { _, motionEvent ->
             //Will happen when image is pressed other wise event is set to false
             when (motionEvent.action){
                 //change opacity of nob direction image when user holds finger on image
                 MotionEvent.ACTION_DOWN, MotionEvent.ACTION_MOVE -> {
                     nobD.alpha = 0.0f
+
+                    //setIsTouch(true)
 
                     val x: Float = motionEvent.x
                     val y: Float = motionEvent.y
@@ -22,12 +34,15 @@ class NobAnimation(private var nob: ImageButton, private var nobD: ImageButton, 
                     val angle = Math.toDegrees(atan2(y - nobCenterY, x - nobCenterX).toDouble()) + nobDef //counteract preset angle for right nob
 
                     setRotation(angle.toFloat())
-                    //nob.rotation = angle.toFloat()
+                    canvas.classicCanvas(getRotation(), firstTime, getDirection())
+                    firstTime = false
                 }
                 //when user lets go or the hold action is stopped
                 // it will reset the opacity of the direction image
                 MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
                     nobD.alpha = 1.0f
+                    firstTime = true //resetting
+                    //setIsTouch(false) //Notify classicDraw that knobs are no longer being touched
                 }
             }
             false
@@ -42,4 +57,21 @@ class NobAnimation(private var nob: ImageButton, private var nobD: ImageButton, 
     fun setRotation(r : Float){
         this.nob.rotation = r
     }
+
+    fun getIsTouch() : Boolean{
+        return this.isTouch;
+    }
+
+    fun setIsTouch(isTouch : Boolean){
+        this.isTouch = isTouch
+    }
+
+    fun getDirection() : Boolean{
+        return this.derection;
+    }
+
+    fun setDirection(derection : Boolean){
+        this.derection = derection
+    }
+
 }

@@ -17,11 +17,11 @@ open class DrawCanvas(activity: AppCompatActivity) {
     private val screenWidth = displayMetrics.widthPixels
     private val screenHeight = displayMetrics.heightPixels
     private val bitmap = Bitmap.createBitmap(screenWidth, screenHeight, Bitmap.Config.ARGB_8888)
-    private val traceCanvas = Canvas(bitmap)
+    private val canvas = Canvas(bitmap)
     private val paint = Paint()
 
     open fun create(){
-        this.traceCanvas.drawColor(Color.WHITE)
+        this.canvas.drawColor(Color.WHITE)
         this.paint.color = Color.BLACK
         this.paint.strokeWidth = 10f
         this.drawingCanvasId.setImageBitmap(bitmap)
@@ -38,8 +38,8 @@ open class DrawCanvas(activity: AppCompatActivity) {
     fun setOldDrawY(y : Float) {
         this.oldY = y
     }
-    fun getTraceCanvas() : Canvas {
-        return this.traceCanvas
+    fun getCanvas() : Canvas {
+        return this.canvas
     }
     fun getBitMap() : Bitmap{
         return this.bitmap
