@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 open class DrawCanvas(activity: AppCompatActivity) {
     private var oldX: Float = 0f
     private var oldY: Float = 0f
+    private var xyPoints = mutableMapOf<Float,Float>()
     private val drawingCanvasId = activity.findViewById<ImageView>(R.id.drawingCanvas)
     private val displayMetrics = activity.resources.displayMetrics
     private val screenWidth = displayMetrics.widthPixels
@@ -49,5 +50,11 @@ open class DrawCanvas(activity: AppCompatActivity) {
     }
     fun getPaint() : Paint {
         return this.paint;
+    }
+    fun setxyPoints(x: Float,y: Float){
+        this.xyPoints.put(x,y)
+    }
+    fun getxyPointsSize() : Int {
+        return this.xyPoints.size
     }
 }

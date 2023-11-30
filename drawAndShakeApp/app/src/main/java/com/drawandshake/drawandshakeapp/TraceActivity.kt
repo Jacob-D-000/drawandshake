@@ -12,7 +12,6 @@ import androidx.appcompat.app.AppCompatActivity
  * I also call the Fucktion DrawBackArrow().backPressed() here as well - i will go over that in the file its self
  */
 class TraceActivity : AppCompatActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)

@@ -31,6 +31,7 @@ class DrawBackArrowEvent(private val activity: AppCompatActivity){
                 }
                 //when user lets go or the hold action is stoped it will loud the proper page
                 MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
+                    SaveDrawing(activity).save()
                     val intent = Intent(activity, MainActivity::class.java)
                     activity.startActivity(intent)
                 }
