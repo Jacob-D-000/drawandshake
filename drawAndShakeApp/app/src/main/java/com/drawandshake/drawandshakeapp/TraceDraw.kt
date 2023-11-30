@@ -9,8 +9,9 @@ class TraceDraw(private val activity: AppCompatActivity) : DrawCanvas(activity) 
     @SuppressLint("ClickableViewAccessibility")
     fun traceCanvas(){
         //x,y
-        val xyPoints = mutableMapOf<Float,Float>()
+        //val xyPoints = mutableMapOf<Float,Float>()
         var firstTime = true
+        display()
         this.activity.findViewById<ImageView>(R.id.drawingCanvas).setOnTouchListener { _, motionEvent ->
 
             when (motionEvent.action)

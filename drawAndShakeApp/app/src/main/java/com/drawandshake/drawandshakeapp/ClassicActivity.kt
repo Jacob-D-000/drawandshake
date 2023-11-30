@@ -18,7 +18,6 @@ class ClassicActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_classic)
-        DrawBackArrowEvent(this).backPressed()
     }
     //negate button press for both nobs
     @SuppressLint("ClickableViewAccessibility", "CutPasteId")
@@ -26,6 +25,7 @@ class ClassicActivity : AppCompatActivity() {
         super.onStart()
 
         val canvas = ClassicDraw(this)
+        DrawBackArrowEvent(this, canvas).backPressed()
         canvas.create()
         ShakeDetector(this, canvas.getTraceCanvas(), canvas.getBitMap(), canvas.getCanvasID()).start()
 

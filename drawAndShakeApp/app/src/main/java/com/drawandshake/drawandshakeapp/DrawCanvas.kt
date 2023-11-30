@@ -27,6 +27,14 @@ open class DrawCanvas(activity: AppCompatActivity) {
         this.paint.strokeWidth = 10f
         this.drawingCanvasId.setImageBitmap(bitmap)
     }
+    //read array to canvas
+    fun save(){
+
+    }
+    //read file to canvas
+    fun display(){
+
+    }
     fun getOldDrawX() : Float {
         return this.oldX
     }
@@ -54,7 +62,8 @@ open class DrawCanvas(activity: AppCompatActivity) {
     fun setxyPoints(x: Float,y: Float){
         this.xyPoints.put(x,y)
     }
-    fun getxyPointsSize() : Int {
+    fun getxyPoints() : Int {
         return this.xyPoints.size
     }
 }
+//MutableMap<Float, Float>

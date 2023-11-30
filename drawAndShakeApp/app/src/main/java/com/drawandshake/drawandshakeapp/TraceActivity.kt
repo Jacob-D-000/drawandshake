@@ -16,7 +16,7 @@ class TraceActivity : AppCompatActivity() {
     {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_trace)
-        DrawBackArrowEvent(this).backPressed()
+
         // Initialize and start listening for shake events (Liam's Code)
     }
 
@@ -24,6 +24,7 @@ class TraceActivity : AppCompatActivity() {
     {
         super.onStart()
         val canvas = TraceDraw(this)
+        DrawBackArrowEvent(this, canvas).backPressed()
         ShakeDetector(this, canvas.getTraceCanvas(), canvas.getBitMap(), canvas.getCanvasID()).start()
         canvas.create()
         canvas.traceCanvas()
