@@ -10,13 +10,10 @@ class NobAnimation(
     private var nobD: ImageButton,
     private var nobDef: Float,
     private var isTouch: Boolean,
-    private var derection: Boolean,
     private var canvas: ClassicDraw
 ) {
     @SuppressLint("ClickableViewAccessibility")
     fun animation(){
-        setDirection(derection)
-        var firstTime = true
 
         nobD.setOnTouchListener { _, motionEvent ->
             //Will happen when image is pressed other wise event is set to false
@@ -34,14 +31,12 @@ class NobAnimation(
                     val angle = Math.toDegrees(atan2(y - nobCenterY, x - nobCenterX).toDouble()) + nobDef //counteract preset angle for right nob
 
                     setRotation(angle.toFloat())
-                    canvas.classicCanvas(getRotation(), firstTime, getDirection())
-                    firstTime = false
+                    // canvas.classicCanvas(firstTime) //No longer called, thread has been created in classicDraw
                 }
                 //when user lets go or the hold action is stopped
                 // it will reset the opacity of the direction image
                 MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
                     nobD.alpha = 1.0f
-                    firstTime = true //resetting
                     //setIsTouch(false) //Notify classicDraw that knobs are no longer being touched
                 }
             }
@@ -64,14 +59,6 @@ class NobAnimation(
 
     fun setIsTouch(isTouch : Boolean){
         this.isTouch = isTouch
-    }
-
-    fun getDirection() : Boolean{
-        return this.derection;
-    }
-
-    fun setDirection(derection : Boolean){
-        this.derection = derection
     }
 
 }

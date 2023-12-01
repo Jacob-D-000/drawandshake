@@ -44,6 +44,10 @@ open class DrawCanvas(activity: AppCompatActivity) {
     fun getBitMap() : Bitmap{
         return this.bitmap
     }
+
+//    fun setBitMap(bitmap: Bitmap) {
+//        this.bitmap = bitmap;
+//    }
     fun getCanvasID() : ImageView {
         return this.drawingCanvasId
     }

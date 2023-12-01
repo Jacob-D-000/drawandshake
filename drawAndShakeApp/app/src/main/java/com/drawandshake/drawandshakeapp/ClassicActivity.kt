@@ -19,6 +19,7 @@ class ClassicActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_classic)
         DrawBackArrowEvent(this).backPressed()
+
     }
     //negate button press for both nobs
     @SuppressLint("ClickableViewAccessibility", "CutPasteId")
@@ -27,13 +28,16 @@ class ClassicActivity : AppCompatActivity() {
 
         val canvas = ClassicDraw(this)
         canvas.create()
+        canvas.setOldDrawX(500.0f)
+        canvas.setOldDrawY(500.0f)
         ShakeDetector(this, canvas.getCanvas(), canvas.getBitMap(), canvas.getCanvasID()).start()
 
         val leftNob = NobAnimation(findViewById(R.id.leftButton), findViewById(R.id.leftButtonDirection), 0f, false, canvas)
         leftNob.animation()
 
-        val rightNob = NobAnimation(findViewById(R.id.rightButton), findViewById(R.id.rightButtonDirection),90f, false, canvas)
+        val rightNob = NobAnimation(findViewById(R.id.rightButton), findViewById(R.id.rightButtonDirection),0f, false, canvas)
         rightNob.animation()
 
+        canvas.classicCanvas()
     }
 }
