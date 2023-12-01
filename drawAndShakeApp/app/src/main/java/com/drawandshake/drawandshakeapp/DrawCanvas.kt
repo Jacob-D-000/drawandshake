@@ -10,13 +10,14 @@ import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 
 open class DrawCanvas(activity: AppCompatActivity) {
-    private var oldX: Float = 0f
-    private var oldY: Float = 0f
+    private var oldX: Float = 500f
+    private var oldY: Float = 500f
     private val drawingCanvasId = activity.findViewById<ImageView>(R.id.drawingCanvas)
     private val displayMetrics = activity.resources.displayMetrics
     private val screenWidth = displayMetrics.widthPixels
     private val screenHeight = displayMetrics.heightPixels
-    private val bitmap = Bitmap.createBitmap(screenWidth, screenHeight, Bitmap.Config.ARGB_8888)
+    private val startingBitmap = Bitmap.createBitmap(screenWidth, screenHeight, Bitmap.Config.ARGB_8888)
+    private var bitmap = startingBitmap // by default
     private val canvas = Canvas(bitmap)
     private val paint = Paint()
 
@@ -24,7 +25,7 @@ open class DrawCanvas(activity: AppCompatActivity) {
         this.canvas.drawColor(Color.WHITE)
         this.paint.color = Color.BLACK
         this.paint.strokeWidth = 10f
-        this.drawingCanvasId.setImageBitmap(bitmap)
+        this.drawingCanvasId.setImageBitmap(startingBitmap)
     }
     fun getOldDrawX() : Float {
         return this.oldX
@@ -44,10 +45,14 @@ open class DrawCanvas(activity: AppCompatActivity) {
     fun getBitMap() : Bitmap{
         return this.bitmap
     }
+    fun resetBitMap() {
+        this.drawingCanvasId.setImageBitmap(startingBitmap)
+    }
 
-//    fun setBitMap(bitmap: Bitmap) {
-//        this.bitmap = bitmap;
-//    }
+    fun setBitMap(bitmap: Bitmap) {
+        this.bitmap = bitmap;
+    }
+
     fun getCanvasID() : ImageView {
         return this.drawingCanvasId
     }

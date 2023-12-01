@@ -3,15 +3,18 @@ package com.drawandshake.drawandshakeapp
 import android.annotation.SuppressLint
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.drawToBitmap
 import kotlin.math.abs
 
 class ClassicDraw(private val activity: AppCompatActivity) : DrawCanvas(activity) {
+
+    private var rotationThread: Thread? = null
+    private val shakyHandsDeadzone = 3;
     @SuppressLint("ClickableViewAccessibility")
     fun classicCanvas()
     {
 
         // Call NobAnimation to Rotate and setup touch listen.
-
         var oldLeftRotation : Float
         var oldRightRotation : Float
         var currentLeftRotation : Float
@@ -24,85 +27,78 @@ class ClassicDraw(private val activity: AppCompatActivity) : DrawCanvas(activity
         val leftNob = activity.findViewById<ImageButton>(R.id.leftButton)
         val rightNob = activity.findViewById<ImageButton>(R.id.rightButton)
 
-
-
-        //Starting the Thread to make drawing Loop
-        val rotationThread = Thread()
+        //Starting the Thread to make drawing Loop | Only create if it does not exist yet
+        // this.getCanvas().setBitmap(getBitMap())
+        if (this.rotationThread == null)
         {
-            // Turn off when you leave
-            while (true)
+            this.rotationThread = Thread()
             {
-                //Thread.sleep(0)
-                // This is only updated if the thread gets the chance to sleep. otherwise it reverts to first rotation.
-                oldLeftRotation =  rotationCorrection(leftNob.rotation)
-                oldRightRotation =  rotationCorrection(rightNob.rotation)
-                Thread.sleep(100)
+                // TODO: Turn off when you leave this activity
+                while (true) {
+                    //Dumb idea, if the rotation of the image is between -180 to -0 degrees.
+                    //subtract the absolute value of the rotation from 360 to transform them into
+                    // 180-359 degrees.  Instead of using -180 to 180, just use 0 to 360
+                    oldLeftRotation = rotationCorrection(leftNob.rotation)
+                    oldRightRotation = rotationCorrection(rightNob.rotation)
+                    Thread.sleep(100)
+                    currentLeftRotation = rotationCorrection(leftNob.rotation)
+                    currentRightRotation = rotationCorrection(rightNob.rotation)
 
-                currentLeftRotation =  rotationCorrection(leftNob.rotation)
-                currentRightRotation =  rotationCorrection(rightNob.rotation)
+                    // Checking if positive rotation, | 3 instead of 0 for shaky hands
+                    if ((oldRightRotation - currentRightRotation) > shakyHandsDeadzone) {
+                        // println("Up : " + (oldRightRotation - currentRightRotation) )
+                        currentY = getOldDrawY() + 10
+                    }
+                    // Checking if negative, moving down if so | -3 instead of 0 for shaky hands
+                    else if ((oldRightRotation - currentRightRotation) < -shakyHandsDeadzone) {
+                        // println("Down: " + (oldRightRotation - currentRightRotation)  )
+                        currentY = getOldDrawY() - 10
+                    }
+                    // No Change, not being touched
+                    else {
+                        currentY = getOldDrawY()
+                    }
 
-                //Dumb idea, if the rotation is -180 to -0, going to subtract the absolute value of the rotation from 360 to fake 0-360 degs instead of using -180 to 180
-//                oldLeftRotation = rotationCorrection(oldLeftRotation)
-//                oldRightRotation = rotationCorrection(oldRightRotation)
-//                currentLeftRotation = rotationCorrection(currentLeftRotation)
-//                currentRightRotation = rotationCorrection(currentRightRotation)
+                    // Checking if positive, moving RIGHT if so | 3 instead of 0 for shaky hands
+                    if ((oldLeftRotation - currentLeftRotation) > shakyHandsDeadzone) {
+                        currentX = getOldDrawX() - 10
+                        // println("Right: " + (oldRightRotation - currentRightRotation) )
+                    }
+                    // Checking if negative, moving LEFT if so. | -3 instead of 0 for shaky hands
+                    else if ((oldLeftRotation - currentLeftRotation) < -shakyHandsDeadzone) {
+                        //println("Left: " + (oldRightRotation - currentRightRotation))
+                        currentX = getOldDrawX() + 10
+                    }
+                    // No Change, not being touched
+                    else {
+                        currentX = getOldDrawX()
+                    }
 
-                // println("oldRightRotation: " + oldRightRotation + "currentRightRotation: " + currentRightRotation )
+                    //Draw Line
+                    this.getCanvas().drawLine(getOldDrawX(), getOldDrawY(), currentX, currentY, getPaint())
+                    this.getCanvasID().setImageBitmap(getBitMap())
 
-                // Checking if positive rotation,
-                if ( ( oldRightRotation - currentRightRotation )  > 5 )
-                {
-                    println("Up : " + (oldRightRotation - currentRightRotation) )
-                    currentY = getOldDrawY() + 10
+                    // Move this to on close for final version, using this to test | BROKEN
+                    // this.setBitMap(getBitMap())
+
+                    //Make Current the Draw
+                    setOldDrawX(currentX)
+                    setOldDrawY(currentY)
                 }
-                // Checking if negative, moving down if so
-                else if ( (oldRightRotation - currentRightRotation )  < -5)
-                {
-                    println("Down: " + (oldRightRotation - currentRightRotation)  )
-                    currentY = getOldDrawY() - 10
-                }
-                // No Change, not being touched
-                else
-                {
-                    currentY = getOldDrawY()
-                }
-
-                // Checking if positive, moving right if so
-                if ( (oldLeftRotation - currentLeftRotation) > 5 ) {
-                    currentX = getOldDrawX() + 10
-                    println("Right: " + (oldRightRotation - currentRightRotation) )
-                }
-                // Checking if negative, moving left if so
-                else if ( ( oldLeftRotation - currentLeftRotation) < -5)
-                {
-                    println("Left: " + (oldRightRotation - currentRightRotation)  )
-                    currentX = getOldDrawX() - 10
-                }
-                // No Change, not being touched
-                else
-                {
-                    currentX = getOldDrawX()
-                }
-
-                //Draw Line
-                this.getCanvas().drawLine(getOldDrawX(), getOldDrawY(), currentX, currentY, getPaint())
-                this.getCanvasID().setImageBitmap(getBitMap())
-                //this.getTraceCanvas().drawLine(getOldDrawX(), getOldDrawY(), x, y, getPaint())
-
-
-                //Make Current the Draw
-                setOldDrawX(currentX)
-                setOldDrawY(currentY)
             }
+            // Let it run in the background, then start thread
+            rotationThread?.isDaemon = true
+            rotationThread?.start()
         }
-        // Let it run in the background, then start thread
-        rotationThread.isDaemon = true
-        rotationThread.start()
+        // TODO: THIS NEVER RUNS, EVEN IF THE THREAD ALREADY EXISTS
+        else { println("Thread Already Exists")}
     }
+
 
     // Checks if the rotation negative, converting it to the positive equivalent rotation wise.
     // -179 becomes 181 | -90 becomes 270 | 90 remains 90  .
-    private fun rotationCorrection(rotation : Float): Float {
+    private fun rotationCorrection(rotation : Float): Float
+    {
 
         //For some reason, kotlin sees rotation as a val here, making a temp variable to fix it
         var updatedRotation = rotation
