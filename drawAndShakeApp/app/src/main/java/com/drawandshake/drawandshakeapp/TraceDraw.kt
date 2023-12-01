@@ -11,7 +11,7 @@ class TraceDraw(private val activity: AppCompatActivity) : DrawCanvas(activity) 
         //x,y
         //val xyPoints = mutableMapOf<Float,Float>()
         var firstTime = true
-        display()
+        display(this.activity)
         this.activity.findViewById<ImageView>(R.id.drawingCanvas).setOnTouchListener { _, motionEvent ->
 
             when (motionEvent.action)
