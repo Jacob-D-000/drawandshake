@@ -10,9 +10,10 @@ import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.view.View
 import android.widget.ImageView
+import androidx.appcompat.app.AppCompatActivity
 import kotlin.math.sqrt
 
-class ShakeDetector(context : Context, private val canvas: Canvas, private val bitmap : Bitmap, private val view : View) : SensorEventListener{
+class ShakeDetector(context: Context, private val activity: AppCompatActivity, private val SaveData: DrawCanvas, private val canvas: Canvas, private val bitmap : Bitmap, private val view : View) : SensorEventListener{
     //make sesor listiner and manager
     private var sensorManager: SensorManager? = null
     private var accelerometer: Sensor? = null
@@ -68,6 +69,7 @@ class ShakeDetector(context : Context, private val canvas: Canvas, private val b
                     println("Shake detected!")
                     canvas.drawColor(Color.WHITE)
                     view.findViewById<ImageView>(R.id.drawingCanvas).setImageBitmap(bitmap)
+                    SaveData.delete(this.activity)
                 }
 
                 // Update last values and time

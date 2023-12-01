@@ -22,6 +22,7 @@ open class DrawCanvas(activity: AppCompatActivity) {
     private val bitmap = Bitmap.createBitmap(screenWidth, screenHeight, Bitmap.Config.ARGB_8888)
     private val traceCanvas = Canvas(bitmap)
     private val paint = Paint()
+    private var firstPoint: Boolean = true;
     companion object {
         const val PREFS_NAME = "data" // Replace with your preference file name
         const val KEY_DATA = "Drawing" // Replace with your specific key
@@ -47,6 +48,8 @@ open class DrawCanvas(activity: AppCompatActivity) {
             editor.putString(KEY_DATA, appendedData)
             editor.apply()
         }
+        xyPoints.clear()
+        firstPoint = true
     }
     //read file to canvas
     fun display(context: Context){
@@ -55,27 +58,43 @@ open class DrawCanvas(activity: AppCompatActivity) {
             KEY_DATA,
             ""
         )
-        val inputString = "1,2\n3,4\n5,6"
 
-//// Split the string into lines
-//        val lines = inputString.split("\n")
-//
-//// Process each line and split into individual numbers
-//        val resultList = mutableListOf<Pair<Int, Int>>()
-//
-//        for (line in lines) {
-//            val numbers = line.split(",")
-//            if (numbers.size == 2) {
-//                val num1 = numbers[0].toInt()
-//                val num2 = numbers[1].toInt()
-//                resultList.add(num1 to num2)
-//            }
-//        }
-//
-//// Now resultList contains pairs of numbers
-//        for (pair in resultList) {
-//            println("Number Pair: $pair")
-//        }
+        if(retrievedData != ""){
+
+            val lines = retrievedData?.split("\n")
+            if (lines != null) {
+                for (line in lines) {
+                    val points = line.split(",")
+                    if (points.size == 2) {
+                        val x = points[0].toFloat()
+                        val y = points[1].toFloat()
+                        xyPoints.put(x,y)
+                    }
+                }
+            }
+
+            getxyPoints().forEach { entry ->
+                if(firstPoint){
+                    setOldDrawX(entry.key)
+                    setOldDrawY(entry.value)
+                    firstPoint = false
+                }
+                this.getTraceCanvas().drawLine(getOldDrawX(), getOldDrawY(), entry.key, entry.value, getPaint())
+                this.getCanvasID().setImageBitmap(getBitMap())
+                setOldDrawX(entry.key)
+                setOldDrawY(entry.value)
+            }
+        }
+        xyPoints.clear()
+    }
+
+    fun delete(context: Context){
+        val sharedPreferences: SharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        val editor: SharedPreferences.Editor = sharedPreferences.edit()
+
+        editor.clear()
+        editor.apply()
+        xyPoints.clear()
     }
     fun getOldDrawX() : Float {
         return this.oldX
