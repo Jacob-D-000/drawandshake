@@ -59,33 +59,48 @@ open class DrawCanvas(activity: AppCompatActivity) {
             ""
         )
 
-        if(retrievedData != ""){
+        if(retrievedData != "") {
 
             val lines = retrievedData?.split("\n")
             if (lines != null) {
                 for (line in lines) {
                     val points = line.split(",")
                     if (points.size == 2) {
-                        val x = points[0].toFloat()
-                        val y = points[1].toFloat()
-                        xyPoints.put(x,y)
+                        if (points[0] == "new" && points[1] == "line") {
+                            getxyPoints().forEach { entry ->
+                                if (firstPoint) {
+                                    setOldDrawX(entry.key)
+                                    setOldDrawY(entry.value)
+                                    firstPoint = false
+                                }
+                                this.getTraceCanvas().drawLine(
+                                    getOldDrawX(),
+                                    getOldDrawY(),
+                                    entry.key,
+                                    entry.value,
+                                    getPaint()
+                                )
+                                this.getCanvasID().setImageBitmap(getBitMap())
+                                setOldDrawX(entry.key)
+                                setOldDrawY(entry.value)
+                            }
+                            xyPoints.clear()
+                        } else {
+                            val x = points[0].toFloat()
+                            val y = points[1].toFloat()
+                            xyPoints.put(x, y)
+                        }
                     }
                 }
             }
-
-            getxyPoints().forEach { entry ->
-                if(firstPoint){
-                    setOldDrawX(entry.key)
-                    setOldDrawY(entry.value)
-                    firstPoint = false
-                }
-                this.getTraceCanvas().drawLine(getOldDrawX(), getOldDrawY(), entry.key, entry.value, getPaint())
-                this.getCanvasID().setImageBitmap(getBitMap())
-                setOldDrawX(entry.key)
-                setOldDrawY(entry.value)
-            }
         }
-        xyPoints.clear()
+    }
+    fun newline(context: Context){
+        val sharedPreferences: SharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        val editor: SharedPreferences.Editor = sharedPreferences.edit()
+
+        editor.putString(KEY_DATA, "new,line\n")
+        editor.apply()
     }
 
     fun delete(context: Context){

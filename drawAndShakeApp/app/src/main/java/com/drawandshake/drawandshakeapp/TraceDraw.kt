@@ -37,6 +37,7 @@ class TraceDraw(private val activity: AppCompatActivity) : DrawCanvas(activity) 
                     setOldDrawY(y)
                 }
                 MotionEvent.ACTION_UP -> {
+                    newline(this.activity)
                     firstTime = true
                 }
             }
