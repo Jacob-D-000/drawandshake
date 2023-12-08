@@ -17,7 +17,7 @@ import androidx.appcompat.app.AppCompatActivity
  * I then apply a event listener to the button
  * when the button is pressed it loads the menu activity
  */
-class DrawBackArrowEvent(private val activity: AppCompatActivity){
+class DrawBackArrowEvent(private val activity: AppCompatActivity, private val canvas: DrawCanvas){
     //negates on click events for back arrow button
     @SuppressLint("ClickableViewAccessibility")
     fun backPressed() {
@@ -31,6 +31,7 @@ class DrawBackArrowEvent(private val activity: AppCompatActivity){
                 }
                 //when user lets go or the hold action is stoped it will loud the proper page
                 MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
+                    this.canvas.save(this.activity)
                     val intent = Intent(activity, MainActivity::class.java)
                     activity.startActivity(intent)
                 }

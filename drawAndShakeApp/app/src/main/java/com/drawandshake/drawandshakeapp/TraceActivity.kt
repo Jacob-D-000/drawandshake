@@ -12,12 +12,11 @@ import androidx.appcompat.app.AppCompatActivity
  * I also call the Fucktion DrawBackArrow().backPressed() here as well - i will go over that in the file its self
  */
 class TraceActivity : AppCompatActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_trace)
-        DrawBackArrowEvent(this).backPressed()
+
         // Initialize and start listening for shake events (Liam's Code)
     }
 
@@ -25,7 +24,8 @@ class TraceActivity : AppCompatActivity() {
     {
         super.onStart()
         val canvas = TraceDraw(this)
-        ShakeDetector(this, canvas.getCanvas(), canvas.getBitMap(), canvas.getCanvasID()).start()
+        DrawBackArrowEvent(this, canvas).backPressed()
+        ShakeDetector(this, this, canvas, canvas.getTraceCanvas(), canvas.getBitMap(), canvas.getCanvasID()).start()
         canvas.create()
         canvas.traceCanvas()
     }
