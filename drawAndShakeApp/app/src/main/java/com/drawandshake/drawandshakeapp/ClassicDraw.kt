@@ -14,7 +14,7 @@ class ClassicDraw(private val activity: AppCompatActivity) : DrawCanvas(activity
     @SuppressLint("ClickableViewAccessibility")
     fun classicCanvas()
     {
-
+        display(this.activity)
         // Call NobAnimation to Rotate and setup touch listen.
         var oldLeftRotation : Float
         var oldRightRotation : Float
@@ -89,6 +89,7 @@ class ClassicDraw(private val activity: AppCompatActivity) : DrawCanvas(activity
                     this.getCanvasID().setImageBitmap(getBitMap())
 
                     //Make Current the Draw
+                    setxyPoints(currentX,currentY)
                     setOldDrawX(currentX)
                     setOldDrawY(currentY)
                 }

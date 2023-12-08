@@ -27,7 +27,7 @@ class ClassicActivity : AppCompatActivity() {
         val canvas = ClassicDraw(this)
         DrawBackArrowEvent(this, canvas).backPressed()
         canvas.create()
-        ShakeDetector(this, this, canvas, canvas.getTraceCanvas(), canvas.getBitMap(), canvas.getCanvasID()).start()
+        ShakeDetector(this, this, canvas, canvas.getCanvas(), canvas.getBitMap(), canvas.getCanvasID()).start()
 
        /* ShakeDetector(this, canvas.getCanvas(), canvas.getBitMap(), canvas.getCanvasID()).start()*/
 

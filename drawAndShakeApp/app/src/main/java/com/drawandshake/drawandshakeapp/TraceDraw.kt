@@ -31,7 +31,7 @@ class TraceDraw(private val activity: AppCompatActivity) : DrawCanvas(activity) 
 
                     setxyPoints(x,y)
 
-                    this.getTraceCanvas().drawLine(getOldDrawX(), getOldDrawY(), x, y, getPaint())
+                    this.getCanvas().drawLine(getOldDrawX(), getOldDrawY(), x, y, getPaint())
                     this.getCanvasID().setImageBitmap(getBitMap())
                     setOldDrawX(x)
                     setOldDrawY(y)
