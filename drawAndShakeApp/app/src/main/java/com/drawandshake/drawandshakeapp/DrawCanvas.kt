@@ -14,7 +14,9 @@ import android.content.SharedPreferences
 open class DrawCanvas(activity: AppCompatActivity) {
     private var oldX: Float = 0f
     private var oldY: Float = 0f
-    private var xyPoints = mutableMapOf<Float,Float>()
+
+    //private var xyPoints = mutableMapOf<Float,Float>()
+    private var xyPoints = arrayListOf<Array<Float>>()
     private val drawingCanvasId = activity.findViewById<ImageView>(R.id.drawingCanvas)
     private val displayMetrics = activity.resources.displayMetrics
     private val screenWidth = displayMetrics.widthPixels
@@ -43,7 +45,7 @@ open class DrawCanvas(activity: AppCompatActivity) {
         getxyPoints().forEach { entry ->
 
             val existingData = sharedPreferences.getString(KEY_DATA, "")
-            val appendedData = existingData + "${entry.key},${entry.value}\n"
+            val appendedData = existingData + "${entry[0]},${entry[1]}\n"
 
             editor.putString(KEY_DATA, appendedData)
             editor.apply()
@@ -60,47 +62,42 @@ open class DrawCanvas(activity: AppCompatActivity) {
         )
 
         if(retrievedData != "") {
-
             val lines = retrievedData?.split("\n")
             if (lines != null) {
                 for (line in lines) {
                     val points = line.split(",")
                     if (points.size == 2) {
-                        if (points[0] == "new" && points[1] == "line") {
-                            getxyPoints().forEach { entry ->
-                                if (firstPoint) {
-                                    setOldDrawX(entry.key)
-                                    setOldDrawY(entry.value)
-                                    firstPoint = false
-                                }
-                                this.getTraceCanvas().drawLine(
-                                    getOldDrawX(),
-                                    getOldDrawY(),
-                                    entry.key,
-                                    entry.value,
-                                    getPaint()
-                                )
-                                this.getCanvasID().setImageBitmap(getBitMap())
-                                setOldDrawX(entry.key)
-                                setOldDrawY(entry.value)
-                            }
-                            xyPoints.clear()
-                        } else {
-                            val x = points[0].toFloat()
-                            val y = points[1].toFloat()
-                            xyPoints.put(x, y)
-                        }
+                        val x = points[0].toFloat()
+                        val y = points[1].toFloat()
+                        xyPoints.add(arrayOf(x,y))
                     }
                 }
             }
+            getxyPoints().forEach { entry ->
+                if (entry[0] == 0f)
+                {
+                    firstPoint = true;
+                }
+                //if not empty line delimiter do this
+                else  {
+                    if (firstPoint) {
+                        setOldDrawX(entry[0])
+                        setOldDrawY(entry[1])
+                        firstPoint = false
+                    }
+                    this.getTraceCanvas().drawLine(
+                        getOldDrawX(),
+                        getOldDrawY(),
+                        entry[0],
+                        entry[1],
+                        getPaint()
+                    )
+                        setOldDrawX(entry[0])
+                        setOldDrawY(entry[1])
+                }
+                this.getCanvasID().setImageBitmap(getBitMap())
+            }
         }
-    }
-    fun newline(context: Context){
-        val sharedPreferences: SharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-        val editor: SharedPreferences.Editor = sharedPreferences.edit()
-
-        editor.putString(KEY_DATA, "new,line\n")
-        editor.apply()
     }
 
     fun delete(context: Context){
@@ -136,10 +133,9 @@ open class DrawCanvas(activity: AppCompatActivity) {
         return this.paint;
     }
     fun setxyPoints(x: Float,y: Float){
-        this.xyPoints.put(x,y)
+        this.xyPoints.add(arrayOf(x,y))
     }
-    fun getxyPoints() : MutableMap<Float,Float> {
+    fun getxyPoints() : ArrayList<Array<Float>> {
         return this.xyPoints
     }
 }
-//MutableMap<Float, Float>

@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 
 /**********
  * Liam Notes
- * Wow a week just to have chatGTP tell me three lines of code
+ * Wow a week of research just to give up and have chatGTP tell me three lines of code
  * 'good' SHIT android devs
  *
  * here i have the onCreate class for are classic drawing activity as well as the onStart
