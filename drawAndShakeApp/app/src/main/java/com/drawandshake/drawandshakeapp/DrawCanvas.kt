@@ -45,6 +45,14 @@ open class DrawCanvas(activity: AppCompatActivity) {
     fun getBitMap() : Bitmap{
         return this.bitmap
     }
+
+    fun getScreenWidth() : Int {
+        return this.screenWidth;
+    }
+
+    fun getScreenHeight() : Int {
+        return this.screenHeight;
+    }
     fun resetBitMap() {
         this.drawingCanvasId.setImageBitmap(startingBitmap)
     }

@@ -10,6 +10,7 @@ class ClassicDraw(private val activity: AppCompatActivity) : DrawCanvas(activity
 
     private var rotationThread: Thread? = null
     private val shakyHandsDeadzone = 3;
+    private val penSpeed = 20;
     @SuppressLint("ClickableViewAccessibility")
     fun classicCanvas()
     {
@@ -29,14 +30,14 @@ class ClassicDraw(private val activity: AppCompatActivity) : DrawCanvas(activity
 
         //Starting the Thread to make drawing Loop | Only create if it does not exist yet
         // this.getCanvas().setBitmap(getBitMap())
+
         if (this.rotationThread == null)
         {
             this.rotationThread = Thread()
             {
                 // TODO: Turn off when you leave this activity
                 while (true) {
-                    //Dumb idea, if the rotation of the image is between -180 to -0 degrees.
-                    //subtract the absolute value of the rotation from 360 to transform them into
+                    //Subtract the absolute value of the rotation from 360 to transform them into
                     // 180-359 degrees.  Instead of using -180 to 180, just use 0 to 360
                     oldLeftRotation = rotationCorrection(leftNob.rotation)
                     oldRightRotation = rotationCorrection(rightNob.rotation)
@@ -45,41 +46,47 @@ class ClassicDraw(private val activity: AppCompatActivity) : DrawCanvas(activity
                     currentRightRotation = rotationCorrection(rightNob.rotation)
 
                     // Checking if positive rotation, | 3 instead of 0 for shaky hands
-                    if ((oldRightRotation - currentRightRotation) > shakyHandsDeadzone) {
-                        // println("Up : " + (oldRightRotation - currentRightRotation) )
-                        currentY = getOldDrawY() + 10
+                    if ((oldRightRotation - currentRightRotation) > shakyHandsDeadzone)
+                    {
+                        currentY = getOldDrawY() + penSpeed
                     }
                     // Checking if negative, moving down if so | -3 instead of 0 for shaky hands
-                    else if ((oldRightRotation - currentRightRotation) < -shakyHandsDeadzone) {
-                        // println("Down: " + (oldRightRotation - currentRightRotation)  )
-                        currentY = getOldDrawY() - 10
+                    else if ((oldRightRotation - currentRightRotation) < -shakyHandsDeadzone)
+                    {
+                        currentY = getOldDrawY() - penSpeed
                     }
                     // No Change, not being touched
-                    else {
+                    else
+                    {
                         currentY = getOldDrawY()
                     }
 
+                    // Checking if Y would moved out of bounds | Move back in if it did
+                    if ( currentY > getScreenHeight() ) { currentY = getScreenHeight().toFloat() }
+                    else if ( currentY < 0.0f) { currentY = 0.0f }
+
+
                     // Checking if positive, moving RIGHT if so | 3 instead of 0 for shaky hands
-                    if ((oldLeftRotation - currentLeftRotation) > shakyHandsDeadzone) {
-                        currentX = getOldDrawX() - 10
-                        // println("Right: " + (oldRightRotation - currentRightRotation) )
+                    if ((oldLeftRotation - currentLeftRotation) > shakyHandsDeadzone)
+                    {
+                        currentX = getOldDrawX() - penSpeed
                     }
                     // Checking if negative, moving LEFT if so. | -3 instead of 0 for shaky hands
                     else if ((oldLeftRotation - currentLeftRotation) < -shakyHandsDeadzone) {
-                        //println("Left: " + (oldRightRotation - currentRightRotation))
-                        currentX = getOldDrawX() + 10
+                        currentX = getOldDrawX() + penSpeed
                     }
                     // No Change, not being touched
                     else {
                         currentX = getOldDrawX()
                     }
 
-                    //Draw Line
+                    // Checking if X would moved out of bounds | Move back in if it did
+                    if ( currentX > ( getScreenWidth()) ) { currentX = (getScreenWidth()).toFloat() }
+                    else if ( currentX < 0.0f ) { currentX = 0.0f }
+
+                    // Checking if the line was moved out of bounds, returning it in bounds if so.
                     this.getCanvas().drawLine(getOldDrawX(), getOldDrawY(), currentX, currentY, getPaint())
                     this.getCanvasID().setImageBitmap(getBitMap())
-
-                    // Move this to on close for final version, using this to test | BROKEN
-                    // this.setBitMap(getBitMap())
 
                     //Make Current the Draw
                     setOldDrawX(currentX)
