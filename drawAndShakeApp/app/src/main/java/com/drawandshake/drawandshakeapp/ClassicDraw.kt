@@ -2,15 +2,14 @@ package com.drawandshake.drawandshakeapp
 
 import android.annotation.SuppressLint
 import android.widget.ImageButton
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.drawToBitmap
 import kotlin.math.abs
 
-class ClassicDraw(private val activity: AppCompatActivity) : DrawCanvas(activity) {
+class ClassicDraw(private val activity: ClassicActivity) : DrawCanvas(activity) {
 
     private var rotationThread: Thread? = null
     private val shakyHandsDeadzone = 3;
     private val penSpeed = 20;
+    private var active = false
     @SuppressLint("ClickableViewAccessibility")
     fun classicCanvas()
     {
@@ -36,7 +35,7 @@ class ClassicDraw(private val activity: AppCompatActivity) : DrawCanvas(activity
             this.rotationThread = Thread()
             {
                 // TODO: Turn off when you leave this activity
-                while (true) {
+                while (getState()) {
                     //Subtract the absolute value of the rotation from 360 to transform them into
                     // 180-359 degrees.  Instead of using -180 to 180, just use 0 to 360
                     oldLeftRotation = rotationCorrection(leftNob.rotation)
@@ -93,6 +92,9 @@ class ClassicDraw(private val activity: AppCompatActivity) : DrawCanvas(activity
                     setOldDrawX(currentX)
                     setOldDrawY(currentY)
                 }
+                if(!active){
+                    setxyPoints(0f,0f)
+                }
             }
             // Let it run in the background, then start thread
             rotationThread?.isDaemon = true
@@ -117,5 +119,13 @@ class ClassicDraw(private val activity: AppCompatActivity) : DrawCanvas(activity
         }
 
         return updatedRotation
+    }
+
+    fun setActiveState(b : Boolean){
+        active = b
+    }
+
+    private fun getState() : Boolean{
+        return active
     }
 }

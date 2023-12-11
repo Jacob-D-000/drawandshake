@@ -38,7 +38,6 @@ class TraceDraw(private val activity: AppCompatActivity) : DrawCanvas(activity) 
                 }
                 MotionEvent.ACTION_UP -> {
                     setxyPoints(0f,0f)
-
                     firstTime = true
                 }
             }
