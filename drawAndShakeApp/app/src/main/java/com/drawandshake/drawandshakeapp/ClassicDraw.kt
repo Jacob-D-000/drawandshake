@@ -92,7 +92,7 @@ class ClassicDraw(private val activity: ClassicActivity) : DrawCanvas(activity) 
                     setOldDrawX(currentX)
                     setOldDrawY(currentY)
                 }
-                if(!active){
+                if(!getState()){
                     setxyPoints(0f,0f)
                 }
             }
