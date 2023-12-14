@@ -107,78 +107,7 @@ open class DrawCanvas(activity: AppCompatActivity) {
         editor.apply()
         xyPoints.clear()
     }
-    //read array to canvas
-//    @SuppressLint("CommitPrefEdits")
-//    fun save(context: Context){
-//        val sharedPreferences: SharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-//        val editor: SharedPreferences.Editor = sharedPreferences.edit()
-//
-//        getxyPoints().forEach { entry ->
-//
-//            val existingData = sharedPreferences.getString(KEY_DATA, "")
-//            val appendedData = existingData + "${entry[0]},${entry[1]}\n"
-//
-//            editor.putString(KEY_DATA, appendedData)
-//            editor.apply()
-//        }
-//        xyPoints.clear()
-//        firstPoint = true
-//    }
-//    //read file to canvas
-//    fun display(context: Context){
-//        val sharedPreferences: SharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-//        val retrievedData = sharedPreferences.getString(
-//            KEY_DATA,
-//            ""
-//        )
-//
-//        if(retrievedData != "") {
-//            val lines = retrievedData?.split("\n")
-//            if (lines != null) {
-//                for (line in lines) {
-//                    val points = line.split(",")
-//                    if (points.size == 2) {
-//                        val x = points[0].toFloat()
-//                        val y = points[1].toFloat()
-//                        xyPoints.add(arrayOf(x,y))
-//                    }
-//                }
-//            }
-//            getxyPoints().forEach { entry ->
-//                if (entry[0] == 0f)
-//                {
-//                    firstPoint = true;
-//                }
-//                //if not empty line delimiter do this
-//                else  {
-//                    if (firstPoint) {
-//                        setOldDrawX(entry[0])
-//                        setOldDrawY(entry[1])
-//                        firstPoint = false
-//                    }
-//                    this.getTraceCanvas().drawLine(
-//                        getOldDrawX(),
-//                        getOldDrawY(),
-//                        entry[0],
-//                        entry[1],
-//                        getPaint()
-//                    )
-//                        setOldDrawX(entry[0])
-//                        setOldDrawY(entry[1])
-//                }
-//                this.getCanvasID().setImageBitmap(getBitMap())
-//            }
-//        }
-//    }
-//
-//    fun delete(context: Context){
-//        val sharedPreferences: SharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-//        val editor: SharedPreferences.Editor = sharedPreferences.edit()
-//
-//        editor.clear()
-//        editor.apply()
-//        xyPoints.clear()
-//    }
+
     fun getOldDrawX() : Float {
         return this.oldX
     }
