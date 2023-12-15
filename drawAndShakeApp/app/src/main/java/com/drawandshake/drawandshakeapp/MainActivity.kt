@@ -10,14 +10,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SwitchCompat
 
 /***************
- * Nathan and Jacob PLZ read as this activity's are important and make this shit much more understandable
- * also go to the AndroidManifest.xml file to see how activity's are established in the app
- *
- * Liam Notes
- * First and foremost FU$%# SH($ language F%^$ Kotlin
- * anyway
- * this is the main activity file
- *
  * in this file the app is made starting with the activity_main.xml layout file
  * the contents of this activity allow the user to select a drawing mode
  * they can also start the drawing activity
@@ -76,11 +68,6 @@ open class MainActivity : AppCompatActivity() {
                 //when user lets go or the hold action is stoped it will loud the proper page
                 MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
                     if(!drawState){
-                        /**
-                         * here we use java in kotlin WOOOW
-                         * so what this is doing is making a new activity(trace or classic)
-                         * we initialize it then start it
-                         */
                         val intent = Intent(this, TraceActivity::class.java)
                         startActivity(intent)
                     }else{
